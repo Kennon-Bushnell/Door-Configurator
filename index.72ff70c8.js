@@ -564,9 +564,29 @@ var _orbitControls = require("three/examples/jsm/controls/OrbitControls");
 //import Pat03 from '../assets/Kennon_DoorPattern-03-215x300.jpg';
 var _kennonDoorPattern03215X300Jpg = require("../assets/Kennon_DoorPattern-03-215x300.jpg");
 var _kennonDoorPattern03215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern03215X300Jpg);
-const DoorSmallURL = new URL(require("8a1c36361800940d"));
-const DoorSmallBindURL = new URL(require("5403130993b66725"));
-const box = new _three.Box3();
+//Define model URLs
+const Door2225URL = new URL(require("9bdcf9200ace841"));
+const Bind2225URL = new URL(require("b17f2ce2deed44f7"));
+const DoorE2225URL = new URL(require("eb1c471777993d96"));
+const BindE2225URL = new URL(require("316327d927075839"));
+const Door2528URL = new URL(require("d0166c95924ae6c9"));
+const Bind2528URL = new URL(require("db8cd2b96ab34bd"));
+const DoorE2528URL = new URL(require("90d913410ce6e543"));
+const BindE2528URL = new URL(require("7388d0230505077a"));
+const Door2831URL = new URL(require("501f88fbf451ccfd"));
+const Bind2831URL = new URL(require("ab2d1ced0b61a9d4"));
+const DoorE2831URL = new URL(require("ab73fe8ca67fbbe2"));
+const BindE2831URL = new URL(require("cf0f7ee8c3845f34"));
+const Door3134URL = new URL(require("f19bcb3bf5982bb6"));
+const Bind3134URL = new URL(require("f3f642acf0461ef6"));
+const DoorE3134URL = new URL(require("42cf8adef48e271f"));
+const BindE3134URL = new URL(require("f5a5ba31e26a3ed7"));
+const widths = [
+    0.7,
+    0.9,
+    1.1,
+    1.2
+];
 const scene = new _three.Scene();
 const camera = new _three.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
@@ -577,7 +597,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 const objloader = new (0, _objloader.OBJLoader)();
 const textureloader = new _three.TextureLoader();
-const geometry = new _three.BoxGeometry(3.5, doorHeight + 1.75, 1);
+const geometry = new _three.BoxGeometry(2, doorHeight + 2, 1);
 let params1 = {
     color: "#e0e0e0",
     roughness: 0.5,
@@ -586,18 +606,20 @@ let params1 = {
 const material1 = new _three.MeshStandardMaterial(params1);
 const strut1 = new _three.Mesh(geometry, material1);
 scene.add(strut1);
-strut1.position.x = -doorWidth / 2 - 1.75;
+strut1.position.x = -doorWidth / 2 - 1;
+strut1.position.y = 1;
 strut1.castShadow = true;
 strut1.receiveShadow = true;
 const strut2 = new _three.Mesh(geometry, material1);
 scene.add(strut2);
-strut2.position.x = doorWidth / 2 + 1.75;
+strut2.position.x = doorWidth / 2 + 1;
+strut2.position.y = 1;
 strut2.receiveShadow = true;
 strut2.castShadow = true;
-const geometry2 = new _three.BoxGeometry(doorWidth + 7, 3.5, 1);
+const geometry2 = new _three.BoxGeometry(doorWidth + 4, 2, 1);
 const rail = new _three.Mesh(geometry2, material1);
 scene.add(rail);
-rail.position.y = doorHeight / 2 + 1.75;
+rail.position.y = doorHeight / 2 + 2;
 rail.receiveShadow = true;
 rail.castShadow = true;
 const wallgeo = new _three.BoxGeometry(300, 300, 1);
@@ -640,6 +662,7 @@ const floorgeo = new _three.BoxGeometry(300, 1, 300);
 const floor = new _three.Mesh(floorgeo, floormat);
 scene.add(floor);
 floor.position.y += -doorHeight / 2;
+floor.position.z -= 30;
 floor.receiveShadow = true;
 floor.castShadow = true;
 var doorMat = new _three.MeshStandardMaterial({
@@ -651,37 +674,47 @@ var doorBindMat = new _three.MeshStandardMaterial({
 const TexPat03 = textureloader.load((0, _kennonDoorPattern03215X300JpgDefault.default));
 TexPat03.wrapS = _three.RepeatWrapping;
 TexPat03.wrapT = _three.RepeatWrapping;
-TexPat03.rotation = -Math.PI / 2;
-TexPat03.repeat.set(0.75, 2);
+TexPat03.offset.set(-0.2, -0.2);
+TexPat03.rotation = Math.PI / 2;
+TexPat03.repeat.set(widths[3], 2);
 doorMat.map = TexPat03;
-let DoorSmall;
-objloader.load(DoorSmallURL.href, function(obj) {
-    DoorSmall = obj;
-    scene.add(DoorSmall);
-    DoorSmall.rotation.x += -Math.PI / 2;
-    DoorSmall.position.set(-doorWidth / 2 - 3.5, 30, 0.6);
-    DoorSmall.traverse(function(child) {
+var DoorURL = Door3134URL;
+let Door;
+let DoorMirror;
+objloader.load(DoorURL.href, function(obj) {
+    Door = obj;
+    scene.add(Door);
+    Door.rotation.x += Math.PI / 2;
+    Door.position.set(-doorWidth / 2 - 1.8, -28, 0.85);
+    Door.traverse(function(child) {
         if (child instanceof _three.Mesh) {
             child.material = doorMat;
             child.castShadow = true;
         }
     });
+    if (Bind) renderer.render(scene, camera);
 }, undefined, function(error) {
     console.error(error);
 });
-let DoorSmallBind;
-objloader.load(DoorSmallBindURL.href, function(obj) {
-    DoorSmallBind = obj;
-    scene.add(DoorSmallBind);
-    DoorSmallBind.rotation.x += -Math.PI / 2;
-    DoorSmallBind.position.set(-doorWidth / 2 - 3.5, 30, 1);
-    DoorSmallBind.scale.set(1, 1.01, 1);
-    DoorSmallBind.traverse(function(child) {
+var SingleSaloon = "standard";
+var CurrentSize = 3;
+var Extended = false;
+var BindURL = Bind3134URL;
+let Bind;
+let BindMirror;
+objloader.load(BindURL.href, function(obj) {
+    Bind = obj;
+    scene.add(Bind);
+    Bind.rotation.x += Math.PI / 2;
+    Bind.position.set(-doorWidth / 2 - 1.8, -28, 0.85);
+    Bind.scale.set(1, 1.01, 1);
+    Bind.traverse(function(child) {
         if (child instanceof _three.Mesh) {
             child.material = doorBindMat;
             child.castShadow = true;
         }
     });
+    if (Door) renderer.render(scene, camera);
 }, undefined, function(error) {
     console.error(error);
 });
@@ -708,37 +741,245 @@ window.addEventListener("resize", ()=>{
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene, camera);
 });
+const URLFinder = function() {
+    if (doorWidth <= 25) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2225URL,
+            BindE2225URL,
+            "standard",
+            0
+        ];
+        else return [
+            Door2225URL,
+            Bind2225URL,
+            "standard",
+            0
+        ];
+    } else if (doorWidth <= 28) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2528URL,
+            BindE2528URL,
+            "standard",
+            1
+        ];
+        else return [
+            Door2528URL,
+            Bind2528URL,
+            "standard",
+            1
+        ];
+    } else if (doorWidth <= 31) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2831URL,
+            BindE2831URL,
+            "standard",
+            2
+        ];
+        else return [
+            Door2831URL,
+            Bind2831URL,
+            "standard",
+            2
+        ];
+    } else if (doorWidth <= 34) {
+        if (document.getElementById("extended").checked) return [
+            DoorE3134URL,
+            BindE3134URL,
+            "standard",
+            3
+        ];
+        else return [
+            Door3134URL,
+            Bind3134URL,
+            "standard",
+            3
+        ];
+    } else if (doorWidth <= 54) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2225URL,
+            BindE2225URL,
+            "saloon",
+            0
+        ];
+        else return [
+            Door2225URL,
+            Bind2225URL,
+            "saloon",
+            0
+        ];
+    } else if (doorWidth <= 60) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2528URL,
+            BindE2528URL,
+            "saloon",
+            1
+        ];
+        else return [
+            Door2528URL,
+            Bind2528URL,
+            "saloon",
+            1
+        ];
+    } else if (doorWidth <= 66) {
+        if (document.getElementById("extended").checked) return [
+            DoorE2831URL,
+            BindE2831URL,
+            "saloon",
+            2
+        ];
+        else return [
+            Door2831URL,
+            Bind2831URL,
+            "saloon",
+            2
+        ];
+    } else {
+        if (document.getElementById("extended").checked) return [
+            DoorE3134URL,
+            BindE3134URL,
+            "saloon",
+            3
+        ];
+        else return [
+            Door3134URL,
+            Bind3134URL,
+            "saloon",
+            3
+        ];
+    }
+};
 const Update = function() {
     doorWidth = parseFloat(document.getElementById("doorWidth").value);
     doorHeight = parseFloat(document.getElementById("doorHeight").value);
+    if (document.getElementById("inmm").value == "mm") {
+        doorWidth = Math.round(doorWidth / 25.4 * 100) / 100;
+        doorHeight = Math.round(doorHeight / 25.4 * 100) / 100;
+    }
     strut1.scale.y = doorHeight / 80;
     strut2.scale.y = doorHeight / 80;
-    rail.scale.x = (doorWidth + 7) / 43;
+    rail.scale.x = (doorWidth + 4) / 38;
     strut1.position.x += -(doorWidth - CurrentdoorWidth) / 2;
-    DoorSmall.position.x += -(doorWidth - CurrentdoorWidth) / 2;
-    DoorSmallBind.position.x += -(doorWidth - CurrentdoorWidth) / 2;
+    Door.position.x += -(doorWidth - CurrentdoorWidth) / 2;
+    Bind.position.x += -(doorWidth - CurrentdoorWidth) / 2;
+    if (DoorMirror) {
+        DoorMirror.position.x += (doorWidth - CurrentdoorWidth) / 2;
+        BindMirror.position.x += (doorWidth - CurrentdoorWidth) / 2;
+    }
     strut2.position.x += (doorWidth - CurrentdoorWidth) / 2;
     strut1.position.y += (doorHeight - CurrentdoorHeight) / 2;
     strut2.position.y += (doorHeight - CurrentdoorHeight) / 2;
     rail.position.y += doorHeight - CurrentdoorHeight;
-    DoorSmall.position.y += (doorHeight - CurrentdoorHeight) / 2;
-    DoorSmallBind.position.y += (doorHeight - CurrentdoorHeight) / 2;
+    Door.position.y += (doorHeight - CurrentdoorHeight) / 2;
+    Bind.position.y += (doorHeight - CurrentdoorHeight) / 2;
+    if (DoorMirror) {
+        DoorMirror.position.y += (doorHeight - CurrentdoorHeight) / 2;
+        BindMirror.position.y += (doorHeight - CurrentdoorHeight) / 2;
+    }
     wall1.position.x += -(doorWidth - CurrentdoorWidth) / 2;
     wall2.position.x += (doorWidth - CurrentdoorWidth) / 2;
     wall3.position.y += doorHeight - CurrentdoorHeight;
     CurrentdoorHeight = doorHeight;
     CurrentdoorWidth = doorWidth;
+    console.log(URLFinder()[3]);
+    if (CurrentSize != URLFinder()[3] || SingleSaloon != URLFinder()[2] || Extended != document.getElementById("extended").checked) {
+        scene.remove(Door);
+        scene.remove(DoorMirror);
+        scene.remove(Bind);
+        scene.remove(BindMirror);
+        TexPat03.repeat.set(widths[URLFinder()[3]], 2);
+        objloader.load(URLFinder()[0].href, function(obj) {
+            Door = obj;
+            scene.add(Door);
+            Door.rotation.x += Math.PI / 2;
+            Door.position.set(-doorWidth / 2 - 1.8, -28 + (doorHeight - 80) / 2, 0.85);
+            Door.traverse(function(child) {
+                if (child instanceof _three.Mesh) {
+                    child.material = doorMat;
+                    child.castShadow = true;
+                }
+            });
+            if (Bind && DoorMirror && BindMirror) renderer.render(scene, camera);
+        }, undefined, function(error) {
+            console.error(error);
+        });
+        objloader.load(URLFinder()[1].href, function(obj) {
+            Bind = obj;
+            scene.add(Bind);
+            Bind.rotation.x += Math.PI / 2;
+            Bind.position.set(-doorWidth / 2 - 1.8, -28 + (doorHeight - 80) / 2, 0.85);
+            Bind.traverse(function(child) {
+                if (child instanceof _three.Mesh) {
+                    child.material = doorBindMat;
+                    child.castShadow = true;
+                }
+            });
+            if (Door && DoorMirror && BindMirror) renderer.render(scene, camera);
+        }, undefined, function(error) {
+            console.error(error);
+        });
+        if (URLFinder()[2] == "saloon") {
+            objloader.load(URLFinder()[0].href, function(obj) {
+                DoorMirror = obj;
+                scene.add(DoorMirror);
+                DoorMirror.rotation.x += Math.PI / 2;
+                DoorMirror.rotation.z += Math.PI;
+                DoorMirror.position.set(doorWidth / 2 + 1.8, -28 + (doorHeight - 80) / 2, 0.85);
+                DoorMirror.traverse(function(child) {
+                    if (child instanceof _three.Mesh) {
+                        child.material = doorMat;
+                        child.castShadow = true;
+                    }
+                });
+                if (Bind && DoorMirror && Door) renderer.render(scene, camera);
+            }, undefined, function(error) {
+                console.error(error);
+            });
+            objloader.load(URLFinder()[1].href, function(obj) {
+                BindMirror = obj;
+                scene.add(BindMirror);
+                BindMirror.rotation.x += Math.PI / 2;
+                BindMirror.rotation.z += Math.PI;
+                BindMirror.position.set(doorWidth / 2 + 1.8, -28 + (doorHeight - 80) / 2, 0.85);
+                BindMirror.traverse(function(child) {
+                    if (child instanceof _three.Mesh) {
+                        child.material = doorBindMat;
+                        child.castShadow = true;
+                    }
+                });
+                if (Bind && Door && BindMirror) renderer.render(scene, camera);
+            }, undefined, function(error) {
+                console.error(error);
+            });
+        }
+        Extended = document.getElementById("extended").checked;
+        CurrentSize = URLFinder()[3];
+        SingleSaloon = URLFinder()[2];
+    } else renderer.render(scene, camera);
 };
-document.getElementById("updateDoor").addEventListener("click", Update);
+const intomm = function() {
+    if (document.getElementById("inmm").value == "mm") {
+        document.getElementById("doorWidth").value = Math.ceil(CurrentdoorWidth * 25.4);
+        document.getElementById("doorHeight").value = Math.ceil(CurrentdoorHeight * 25.4);
+    } else {
+        document.getElementById("doorWidth").value = CurrentdoorWidth;
+        document.getElementById("doorHeight").value = CurrentdoorHeight;
+    }
+    Update;
+};
+//document.getElementById("updateDoor").addEventListener("click", Update);
+document.getElementById("doorWidth").addEventListener("change", Update);
+document.getElementById("doorHeight").addEventListener("change", Update);
+document.getElementById("extended").addEventListener("change", Update);
+document.getElementById("inmm").addEventListener("change", intomm);
 const animate = function() {
-    DoorSmallBind;
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 };
 animate();
 
-},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","8a1c36361800940d":"1BF4X","5403130993b66725":"exomU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2023 Three.js Authors
@@ -31234,12 +31475,54 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"1BF4X":[function(require,module,exports) {
-module.exports = require("9ac21d431bdc3d73").getBundleURL("lp3gw") + "DoorSmall.6cb46003.obj" + "?" + Date.now();
+},{}],"57zis":[function(require,module,exports) {
+module.exports = require("7fff1d2b786b640c").getBundleURL("lp3gw") + "Door22-25.dd58bd89.obj" + "?" + Date.now();
 
-},{"9ac21d431bdc3d73":"lgJ39"}],"exomU":[function(require,module,exports) {
-module.exports = require("1eb86a36f0c0bfee").getBundleURL("lp3gw") + "DoorSmallBind.3f65ed52.obj" + "?" + Date.now();
+},{"7fff1d2b786b640c":"lgJ39"}],"iZNGY":[function(require,module,exports) {
+module.exports = require("6b195e2e9cf1061d").getBundleURL("lp3gw") + "Bind22-25.798113e3.obj" + "?" + Date.now();
 
-},{"1eb86a36f0c0bfee":"lgJ39"}]},["ht6sX","eWgaw"], "eWgaw", "parcelRequireebc3")
+},{"6b195e2e9cf1061d":"lgJ39"}],"4CkVl":[function(require,module,exports) {
+module.exports = require("261192cda14e0b5f").getBundleURL("lp3gw") + "DoorE22-25.a409bd7d.obj" + "?" + Date.now();
+
+},{"261192cda14e0b5f":"lgJ39"}],"ewcvC":[function(require,module,exports) {
+module.exports = require("b652d82cfa8a6d67").getBundleURL("lp3gw") + "BindE22-25.f772927e.obj" + "?" + Date.now();
+
+},{"b652d82cfa8a6d67":"lgJ39"}],"fjIZZ":[function(require,module,exports) {
+module.exports = require("ab887d02cd612e85").getBundleURL("lp3gw") + "Door25-28.4a306e4b.obj" + "?" + Date.now();
+
+},{"ab887d02cd612e85":"lgJ39"}],"a5ccz":[function(require,module,exports) {
+module.exports = require("c46e8e1cbe289ba8").getBundleURL("lp3gw") + "Bind25-28.a5e063fa.obj" + "?" + Date.now();
+
+},{"c46e8e1cbe289ba8":"lgJ39"}],"6G6s2":[function(require,module,exports) {
+module.exports = require("8576f26c6c0a05e6").getBundleURL("lp3gw") + "DoorE25-28.db568aa0.obj" + "?" + Date.now();
+
+},{"8576f26c6c0a05e6":"lgJ39"}],"7ovCB":[function(require,module,exports) {
+module.exports = require("8114c8b77510e94f").getBundleURL("lp3gw") + "BindE25-28.11ecf1c3.obj" + "?" + Date.now();
+
+},{"8114c8b77510e94f":"lgJ39"}],"2vALh":[function(require,module,exports) {
+module.exports = require("a6314c02011c38bf").getBundleURL("lp3gw") + "Door28-31.05ed103b.obj" + "?" + Date.now();
+
+},{"a6314c02011c38bf":"lgJ39"}],"6bibl":[function(require,module,exports) {
+module.exports = require("7b769cb45958cc94").getBundleURL("lp3gw") + "Bind28-31.f024cc8e.obj" + "?" + Date.now();
+
+},{"7b769cb45958cc94":"lgJ39"}],"eg2aq":[function(require,module,exports) {
+module.exports = require("48c6766db17d26f1").getBundleURL("lp3gw") + "DoorE28-31.63e93fbe.obj" + "?" + Date.now();
+
+},{"48c6766db17d26f1":"lgJ39"}],"2Y9dF":[function(require,module,exports) {
+module.exports = require("195fcebe5cab7238").getBundleURL("lp3gw") + "BindE28-31.d570dec0.obj" + "?" + Date.now();
+
+},{"195fcebe5cab7238":"lgJ39"}],"8Zu8W":[function(require,module,exports) {
+module.exports = require("24494244be81c0e0").getBundleURL("lp3gw") + "Door31-34.7b3c2b19.obj" + "?" + Date.now();
+
+},{"24494244be81c0e0":"lgJ39"}],"1uDcL":[function(require,module,exports) {
+module.exports = require("d9aec6b9ac7c63d5").getBundleURL("lp3gw") + "Bind31-34.1fdd62b6.obj" + "?" + Date.now();
+
+},{"d9aec6b9ac7c63d5":"lgJ39"}],"lMnZ8":[function(require,module,exports) {
+module.exports = require("1aac094527ee5b08").getBundleURL("lp3gw") + "DoorE31-34.1449e833.obj" + "?" + Date.now();
+
+},{"1aac094527ee5b08":"lgJ39"}],"llRmS":[function(require,module,exports) {
+module.exports = require("ab3a64c4b77a63cc").getBundleURL("lp3gw") + "BindE31-34.40187dc5.obj" + "?" + Date.now();
+
+},{"ab3a64c4b77a63cc":"lgJ39"}]},["ht6sX","eWgaw"], "eWgaw", "parcelRequireebc3")
 
 //# sourceMappingURL=index.72ff70c8.js.map
