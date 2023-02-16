@@ -564,77 +564,6 @@ var _orbitControls = require("three/examples/jsm/controls/OrbitControls");
 //import Pat03 from '../assets/Kennon_DoorPattern-03-215x300.jpg';
 var _kennonDoorPattern03215X300Jpg = require("../assets/Kennon_DoorPattern-03-215x300.jpg");
 var _kennonDoorPattern03215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern03215X300Jpg);
-var _kennonDoorPattern04215X300Jpg = require("../assets/Kennon_DoorPattern-04-215x300.jpg");
-var _kennonDoorPattern04215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern04215X300Jpg);
-var _kennonDoorPattern05215X300Jpg = require("../assets/Kennon_DoorPattern-05-215x300.jpg");
-var _kennonDoorPattern05215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern05215X300Jpg);
-var _kennonDoorPattern06215X300Jpg = require("../assets/Kennon_DoorPattern-06-215x300.jpg");
-var _kennonDoorPattern06215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern06215X300Jpg);
-var _kennonDoorPattern07215X300Jpg = require("../assets/Kennon_DoorPattern-07-215x300.jpg");
-var _kennonDoorPattern07215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern07215X300Jpg);
-var _kennonDoorPattern08215X300Jpg = require("../assets/Kennon_DoorPattern-08-215x300.jpg");
-var _kennonDoorPattern08215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern08215X300Jpg);
-var _kennonDoorPattern09215X300Jpg = require("../assets/Kennon_DoorPattern-09-215x300.jpg");
-var _kennonDoorPattern09215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern09215X300Jpg);
-var _kennonDoorPattern10215X300Jpg = require("../assets/Kennon_DoorPattern-10-215x300.jpg");
-var _kennonDoorPattern10215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorPattern10215X300Jpg);
-var _kennonDoorStock01215X300Jpg = require("../assets/KennonDoor_Stock01-215x300.jpg");
-var _kennonDoorStock01215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock01215X300Jpg);
-var _kennonDoorStock02215X300Jpg = require("../assets/KennonDoor_Stock02-215x300.jpg");
-var _kennonDoorStock02215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock02215X300Jpg);
-var _kennonDoorStock03215X300Jpg = require("../assets/KennonDoor_Stock03-215x300.jpg");
-var _kennonDoorStock03215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock03215X300Jpg);
-var _kennonDoorStock04215X300Jpg = require("../assets/KennonDoor_Stock04-215x300.jpg");
-var _kennonDoorStock04215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock04215X300Jpg);
-var _kennonDoorStock05215X300Jpg = require("../assets/KennonDoor_Stock05-215x300.jpg");
-var _kennonDoorStock05215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock05215X300Jpg);
-var _kennonDoorStock06215X300Jpg = require("../assets/KennonDoor_Stock06-215x300.jpg");
-var _kennonDoorStock06215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock06215X300Jpg);
-var _kennonDoorStock07215X300Jpg = require("../assets/KennonDoor_Stock07-215x300.jpg");
-var _kennonDoorStock07215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock07215X300Jpg);
-var _kennonDoorStock08215X300Jpg = require("../assets/KennonDoor_Stock08-215x300.jpg");
-var _kennonDoorStock08215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock08215X300Jpg);
-var _kennonDoorStock09215X300Jpg = require("../assets/KennonDoor_Stock09-215x300.jpg");
-var _kennonDoorStock09215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorStock09215X300Jpg);
-var _kennonDoorSolidWhite215X300Jpg = require("../assets/KennonDoor_Solid-white-215x300.jpg");
-var _kennonDoorSolidWhite215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorSolidWhite215X300Jpg);
-var _kennonDoorSolidCharcoal215X300Jpg = require("../assets/KennonDoor_Solid-charcoal-215x300.jpg");
-var _kennonDoorSolidCharcoal215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorSolidCharcoal215X300Jpg);
-var _kennonDoorSolidBeige215X300Jpg = require("../assets/KennonDoor_Solid-beige-215x300.jpg");
-var _kennonDoorSolidBeige215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorSolidBeige215X300Jpg);
-var PatNo = 0;
-var CurPatNo = 0;
-const patterns = [
-    (0, _kennonDoorPattern03215X300JpgDefault.default),
-    (0, _kennonDoorPattern04215X300JpgDefault.default),
-    (0, _kennonDoorPattern05215X300JpgDefault.default),
-    (0, _kennonDoorPattern06215X300JpgDefault.default),
-    (0, _kennonDoorPattern07215X300JpgDefault.default),
-    (0, _kennonDoorPattern08215X300JpgDefault.default),
-    (0, _kennonDoorPattern09215X300JpgDefault.default),
-    (0, _kennonDoorPattern10215X300JpgDefault.default),
-    (0, _kennonDoorStock01215X300JpgDefault.default),
-    (0, _kennonDoorStock02215X300JpgDefault.default),
-    (0, _kennonDoorStock03215X300JpgDefault.default),
-    (0, _kennonDoorStock04215X300JpgDefault.default),
-    (0, _kennonDoorStock05215X300JpgDefault.default),
-    (0, _kennonDoorStock06215X300JpgDefault.default),
-    (0, _kennonDoorStock07215X300JpgDefault.default),
-    (0, _kennonDoorStock08215X300JpgDefault.default),
-    (0, _kennonDoorStock09215X300JpgDefault.default),
-    (0, _kennonDoorSolidWhite215X300JpgDefault.default),
-    (0, _kennonDoorSolidCharcoal215X300JpgDefault.default),
-    (0, _kennonDoorSolidBeige215X300JpgDefault.default)
-];
-var BindNo = 0;
-var CurBindNo = 0;
-const bindings = [
-    "#000000",
-    "#070a2b",
-    "#595959",
-    "#bdbdbd",
-    "#ded1a0"
-];
 //Define model URLs
 const Door2225URL = new URL(require("9bdcf9200ace841"));
 const Bind2225URL = new URL(require("b17f2ce2deed44f7"));
@@ -654,8 +583,8 @@ const DoorE3134URL = new URL(require("42cf8adef48e271f"));
 const BindE3134URL = new URL(require("f5a5ba31e26a3ed7"));
 const scene = new _three.Scene();
 var canvas = document.getElementById("DoorCanvas");
-canvas.width = window.innerWidth * 1 / 3;
-canvas.height = window.innerWidth * 1 / 5;
+canvas.width = window.innerWidth * 2 / 3;
+canvas.height = window.innerWidth * 1 / 3;
 const camera = new _three.PerspectiveCamera(30, canvas.width / canvas.height, 0.1, 1000);
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
 var doorHeight = parseFloat(document.getElementById("doorHeight").value);
@@ -759,18 +688,18 @@ const yoffsets = [
     0,
     0
 ];
-var Tex = textureloader.load(patterns[PatNo]);
-Tex.wrapS = _three.RepeatWrapping;
-Tex.wrapT = _three.RepeatWrapping;
-Tex.offset.set(xoffsets[3], yoffsets[3]);
-Tex.rotation = Math.PI / 2;
-Tex.repeat.set(widths[3], heights[3]);
-var TexMirror = textureloader.load(patterns[PatNo]);
-TexMirror.wrapS = _three.RepeatWrapping;
-TexMirror.wrapT = _three.RepeatWrapping;
-TexMirror.offset.set(-xoffsets[3], yoffsets[3]);
-TexMirror.rotation = Math.PI / 2;
-TexMirror.repeat.set(-widths[3], heights[3]);
+const TexPat03 = textureloader.load((0, _kennonDoorPattern03215X300JpgDefault.default));
+TexPat03.wrapS = _three.RepeatWrapping;
+TexPat03.wrapT = _three.RepeatWrapping;
+TexPat03.offset.set(xoffsets[3], yoffsets[3]);
+TexPat03.rotation = Math.PI / 2;
+TexPat03.repeat.set(widths[3], heights[3]);
+const TexPat03Mirror = textureloader.load((0, _kennonDoorPattern03215X300JpgDefault.default));
+TexPat03Mirror.wrapS = _three.RepeatWrapping;
+TexPat03Mirror.wrapT = _three.RepeatWrapping;
+TexPat03Mirror.offset.set(-xoffsets[3], yoffsets[3]);
+TexPat03Mirror.rotation = Math.PI / 2;
+TexPat03Mirror.repeat.set(-widths[3], heights[3]);
 var doorMat = new _three.MeshStandardMaterial({
     roughness: 0.5
 });
@@ -780,8 +709,8 @@ var doorMatMirror = new _three.MeshStandardMaterial({
 var doorBindMat = new _three.MeshStandardMaterial({
     color: "#000000"
 });
-doorMat.map = Tex;
-doorMatMirror.map = TexMirror;
+doorMat.map = TexPat03;
+doorMatMirror.map = TexPat03Mirror;
 var DoorURL = Door3134URL;
 let Door;
 let DoorMirror;
@@ -842,8 +771,8 @@ scene.add(amblight);
 var CurrentdoorWidth = doorWidth;
 var CurrentdoorHeight = doorHeight;
 window.addEventListener("resize", ()=>{
-    canvas.width = window.innerWidth * 1 / 3;
-    canvas.height = window.innerWidth * 1 / 5;
+    canvas.width = window.innerWidth * 2 / 3;
+    canvas.height = window.innerWidth * 1 / 3;
     camera.aspect = canvas.width / canvas.height;
     camera.updateProjectionMatrix();
     renderer.setSize(canvas.width, canvas.height);
@@ -1005,37 +934,14 @@ const Update = function() {
     wall3.position.y += doorHeight - CurrentdoorHeight;
     CurrentdoorHeight = doorHeight;
     CurrentdoorWidth = doorWidth;
-    if (PatNo != CurPatNo) {
-        console.log("ran");
-        Tex = textureloader.load(patterns[PatNo]);
-        Tex.wrapS = _three.RepeatWrapping;
-        Tex.wrapT = _three.RepeatWrapping;
-        Tex.offset.set(xoffsets[3], yoffsets[3]);
-        Tex.rotation = Math.PI / 2;
-        Tex.repeat.set(widths[3], heights[3]);
-        TexMirror = textureloader.load(patterns[PatNo]);
-        TexMirror.wrapS = _three.RepeatWrapping;
-        TexMirror.wrapT = _three.RepeatWrapping;
-        TexMirror.offset.set(-xoffsets[3], yoffsets[3]);
-        TexMirror.rotation = Math.PI / 2;
-        TexMirror.repeat.set(-widths[3], heights[3]);
-        doorMat.map = Tex;
-        doorMatMirror.map = TexMirror;
-        CurPatNo = PatNo;
-    }
-    if (BindNo != CurBindNo) {
-        console.log("ran");
-        doorBindMat.color.set(bindings[BindNo]);
-        CurBindNo = BindNo;
-    }
     if (CurrentSize != URLFinder()[3] || SingleSaloon != URLFinder()[2] || Extended != document.getElementById("extended").checked) {
         CurrentSize = URLFinder()[3];
         scene.remove(Door);
         scene.remove(DoorMirror);
         scene.remove(Bind);
         scene.remove(BindMirror);
-        Tex.offset.set(xoffsets[CurrentSize], yoffsets[CurrentSize]);
-        Tex.repeat.set(widths[CurrentSize], heights[CurrentSize]);
+        TexPat03.offset.set(xoffsets[CurrentSize], yoffsets[CurrentSize]);
+        TexPat03.repeat.set(widths[CurrentSize], heights[CurrentSize]);
         objloader.load(URLFinder()[0].href, function(obj) {
             Door = obj;
             scene.add(Door);
@@ -1067,8 +973,8 @@ const Update = function() {
             console.error(error);
         });
         if (URLFinder()[2] == "saloon") {
-            TexMirror.offset.set(-2 * xoffsets[CurrentSize], yoffsets[CurrentSize]);
-            TexMirror.repeat.set(-widths[CurrentSize], heights[CurrentSize]);
+            TexPat03Mirror.offset.set(-2 * xoffsets[CurrentSize], yoffsets[CurrentSize]);
+            TexPat03Mirror.repeat.set(-widths[CurrentSize], heights[CurrentSize]);
             objloader.load(URLFinder()[0].href, function(obj) {
                 DoorMirror = obj;
                 scene.add(DoorMirror);
@@ -1121,113 +1027,13 @@ document.getElementById("doorWidth").addEventListener("change", Update);
 document.getElementById("doorHeight").addEventListener("change", Update);
 document.getElementById("extended").addEventListener("change", Update);
 document.getElementById("inmm").addEventListener("change", intomm);
-document.getElementById("Pat03").addEventListener("click", function() {
-    PatNo = 0;
-});
-document.getElementById("Pat03").addEventListener("click", Update);
-document.getElementById("Pat04").addEventListener("click", function() {
-    PatNo = 1;
-});
-document.getElementById("Pat04").addEventListener("click", Update);
-document.getElementById("Pat05").addEventListener("click", function() {
-    PatNo = 2;
-});
-document.getElementById("Pat05").addEventListener("click", Update);
-document.getElementById("Pat06").addEventListener("click", function() {
-    PatNo = 3;
-});
-document.getElementById("Pat06").addEventListener("click", Update);
-document.getElementById("Pat07").addEventListener("click", function() {
-    PatNo = 4;
-});
-document.getElementById("Pat07").addEventListener("click", Update);
-document.getElementById("Pat08").addEventListener("click", function() {
-    PatNo = 5;
-});
-document.getElementById("Pat08").addEventListener("click", Update);
-document.getElementById("Pat09").addEventListener("click", function() {
-    PatNo = 6;
-});
-document.getElementById("Pat09").addEventListener("click", Update);
-document.getElementById("Pat10").addEventListener("click", function() {
-    PatNo = 7;
-});
-document.getElementById("Pat10").addEventListener("click", Update);
-document.getElementById("Stock01").addEventListener("click", function() {
-    PatNo = 8;
-});
-document.getElementById("Stock01").addEventListener("click", Update);
-document.getElementById("Stock02").addEventListener("click", function() {
-    PatNo = 9;
-});
-document.getElementById("Stock02").addEventListener("click", Update);
-document.getElementById("Stock03").addEventListener("click", function() {
-    PatNo = 10;
-});
-document.getElementById("Stock03").addEventListener("click", Update);
-document.getElementById("Stock04").addEventListener("click", function() {
-    PatNo = 11;
-});
-document.getElementById("Stock04").addEventListener("click", Update);
-document.getElementById("Stock05").addEventListener("click", function() {
-    PatNo = 12;
-});
-document.getElementById("Stock05").addEventListener("click", Update);
-document.getElementById("Stock06").addEventListener("click", function() {
-    PatNo = 13;
-});
-document.getElementById("Stock06").addEventListener("click", Update);
-document.getElementById("Stock07").addEventListener("click", function() {
-    PatNo = 14;
-});
-document.getElementById("Stock07").addEventListener("click", Update);
-document.getElementById("Stock08").addEventListener("click", function() {
-    PatNo = 15;
-});
-document.getElementById("Stock08").addEventListener("click", Update);
-document.getElementById("Stock09").addEventListener("click", function() {
-    PatNo = 16;
-});
-document.getElementById("Stock09").addEventListener("click", Update);
-document.getElementById("SolWhite").addEventListener("click", function() {
-    PatNo = 17;
-});
-document.getElementById("SolWhite").addEventListener("click", Update);
-document.getElementById("SolCharcoal").addEventListener("click", function() {
-    PatNo = 18;
-});
-document.getElementById("SolCharcoal").addEventListener("click", Update);
-document.getElementById("SolBeige").addEventListener("click", function() {
-    PatNo = 19;
-});
-document.getElementById("SolBeige").addEventListener("click", Update);
-document.getElementById("BindBlack").addEventListener("click", function() {
-    BindNo = 0;
-});
-document.getElementById("BindBlack").addEventListener("click", Update);
-document.getElementById("BindNavy").addEventListener("click", function() {
-    BindNo = 1;
-});
-document.getElementById("BindNavy").addEventListener("click", Update);
-document.getElementById("BindCharcoal").addEventListener("click", function() {
-    BindNo = 2;
-});
-document.getElementById("BindCharcoal").addEventListener("click", Update);
-document.getElementById("BindGray").addEventListener("click", function() {
-    BindNo = 3;
-});
-document.getElementById("BindGray").addEventListener("click", Update);
-document.getElementById("BindBeige").addEventListener("click", function() {
-    BindNo = 4;
-});
-document.getElementById("BindBeige").addEventListener("click", Update);
 const animate = function() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 };
 animate();
 
-},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","../assets/Kennon_DoorPattern-04-215x300.jpg":"3KeWv","../assets/Kennon_DoorPattern-05-215x300.jpg":"ezzSA","../assets/Kennon_DoorPattern-06-215x300.jpg":"glWZW","../assets/Kennon_DoorPattern-07-215x300.jpg":"8FDyi","../assets/Kennon_DoorPattern-08-215x300.jpg":"2bPpU","../assets/Kennon_DoorPattern-09-215x300.jpg":"cJ1xP","../assets/Kennon_DoorPattern-10-215x300.jpg":"eUgux","../assets/KennonDoor_Stock01-215x300.jpg":"e1mKl","../assets/KennonDoor_Stock02-215x300.jpg":"8Jkvh","../assets/KennonDoor_Stock03-215x300.jpg":"13QZl","../assets/KennonDoor_Stock04-215x300.jpg":"8k1W4","../assets/KennonDoor_Stock05-215x300.jpg":"3dB2B","../assets/KennonDoor_Stock06-215x300.jpg":"53Gp4","../assets/KennonDoor_Stock07-215x300.jpg":"4Y6To","../assets/KennonDoor_Stock08-215x300.jpg":"k8TbE","../assets/KennonDoor_Stock09-215x300.jpg":"ca3UX","../assets/KennonDoor_Solid-white-215x300.jpg":"lgFuk","../assets/KennonDoor_Solid-charcoal-215x300.jpg":"8X7D5","../assets/KennonDoor_Solid-beige-215x300.jpg":"lS73n","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2023 Three.js Authors
@@ -31723,64 +31529,7 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"3KeWv":[function(require,module,exports) {
-module.exports = require("4f5ac75ce3e6bbbb").getBundleURL("lp3gw") + "Kennon_DoorPattern-04-215x300.6a073f0a.jpg" + "?" + Date.now();
-
-},{"4f5ac75ce3e6bbbb":"lgJ39"}],"ezzSA":[function(require,module,exports) {
-module.exports = require("6e965272011039b3").getBundleURL("lp3gw") + "Kennon_DoorPattern-05-215x300.7415135e.jpg" + "?" + Date.now();
-
-},{"6e965272011039b3":"lgJ39"}],"glWZW":[function(require,module,exports) {
-module.exports = require("daf194f67ce1439f").getBundleURL("lp3gw") + "Kennon_DoorPattern-06-215x300.338ad833.jpg" + "?" + Date.now();
-
-},{"daf194f67ce1439f":"lgJ39"}],"8FDyi":[function(require,module,exports) {
-module.exports = require("162e792ac45ee32e").getBundleURL("lp3gw") + "Kennon_DoorPattern-07-215x300.20de4990.jpg" + "?" + Date.now();
-
-},{"162e792ac45ee32e":"lgJ39"}],"2bPpU":[function(require,module,exports) {
-module.exports = require("486c8a146f901b5b").getBundleURL("lp3gw") + "Kennon_DoorPattern-08-215x300.ceb9f423.jpg" + "?" + Date.now();
-
-},{"486c8a146f901b5b":"lgJ39"}],"cJ1xP":[function(require,module,exports) {
-module.exports = require("86c13c3efa04a993").getBundleURL("lp3gw") + "Kennon_DoorPattern-09-215x300.133326c2.jpg" + "?" + Date.now();
-
-},{"86c13c3efa04a993":"lgJ39"}],"eUgux":[function(require,module,exports) {
-module.exports = require("c5dedc9374d9841a").getBundleURL("lp3gw") + "Kennon_DoorPattern-10-215x300.9cd28918.jpg" + "?" + Date.now();
-
-},{"c5dedc9374d9841a":"lgJ39"}],"e1mKl":[function(require,module,exports) {
-module.exports = require("b8ef343cd42ab6ae").getBundleURL("lp3gw") + "KennonDoor_Stock01-215x300.927e8129.jpg" + "?" + Date.now();
-
-},{"b8ef343cd42ab6ae":"lgJ39"}],"8Jkvh":[function(require,module,exports) {
-module.exports = require("aae098e65bde4da0").getBundleURL("lp3gw") + "KennonDoor_Stock02-215x300.227f5728.jpg" + "?" + Date.now();
-
-},{"aae098e65bde4da0":"lgJ39"}],"13QZl":[function(require,module,exports) {
-module.exports = require("2dccfd29063192ac").getBundleURL("lp3gw") + "KennonDoor_Stock03-215x300.97609d6c.jpg" + "?" + Date.now();
-
-},{"2dccfd29063192ac":"lgJ39"}],"8k1W4":[function(require,module,exports) {
-module.exports = require("29f0cda53e545b9a").getBundleURL("lp3gw") + "KennonDoor_Stock04-215x300.0d33e801.jpg" + "?" + Date.now();
-
-},{"29f0cda53e545b9a":"lgJ39"}],"3dB2B":[function(require,module,exports) {
-module.exports = require("c4257f7a57c7e9c5").getBundleURL("lp3gw") + "KennonDoor_Stock05-215x300.3298c000.jpg" + "?" + Date.now();
-
-},{"c4257f7a57c7e9c5":"lgJ39"}],"53Gp4":[function(require,module,exports) {
-module.exports = require("341e321f84ce0ec0").getBundleURL("lp3gw") + "KennonDoor_Stock06-215x300.2c846ce1.jpg" + "?" + Date.now();
-
-},{"341e321f84ce0ec0":"lgJ39"}],"4Y6To":[function(require,module,exports) {
-module.exports = require("3ad0e4b0f8e4238e").getBundleURL("lp3gw") + "KennonDoor_Stock07-215x300.92f2902d.jpg" + "?" + Date.now();
-
-},{"3ad0e4b0f8e4238e":"lgJ39"}],"k8TbE":[function(require,module,exports) {
-module.exports = require("5c89e3d441dfb17b").getBundleURL("lp3gw") + "KennonDoor_Stock08-215x300.d3eadadb.jpg" + "?" + Date.now();
-
-},{"5c89e3d441dfb17b":"lgJ39"}],"ca3UX":[function(require,module,exports) {
-module.exports = require("f40a5835285dbbde").getBundleURL("lp3gw") + "KennonDoor_Stock09-215x300.16105ef4.jpg" + "?" + Date.now();
-
-},{"f40a5835285dbbde":"lgJ39"}],"lgFuk":[function(require,module,exports) {
-module.exports = require("d00081729096f741").getBundleURL("lp3gw") + "KennonDoor_Solid-white-215x300.58be3233.jpg" + "?" + Date.now();
-
-},{"d00081729096f741":"lgJ39"}],"8X7D5":[function(require,module,exports) {
-module.exports = require("e4831ee5591ec009").getBundleURL("lp3gw") + "KennonDoor_Solid-charcoal-215x300.af6af312.jpg" + "?" + Date.now();
-
-},{"e4831ee5591ec009":"lgJ39"}],"lS73n":[function(require,module,exports) {
-module.exports = require("4aa4eeba531e3f58").getBundleURL("lp3gw") + "KennonDoor_Solid-beige-215x300.45a1ea50.jpg" + "?" + Date.now();
-
-},{"4aa4eeba531e3f58":"lgJ39"}],"57zis":[function(require,module,exports) {
+},{}],"57zis":[function(require,module,exports) {
 module.exports = require("7fff1d2b786b640c").getBundleURL("lp3gw") + "Door22-25.dd58bd89.obj" + "?" + Date.now();
 
 },{"7fff1d2b786b640c":"lgJ39"}],"iZNGY":[function(require,module,exports) {
