@@ -165,24 +165,19 @@ floor.position.z -= 30
 floor.receiveShadow = true;
 floor.castShadow = true;
 
-const widths = [1.178,1.3,1.426,1.55]
-const heights = [2.7,2.8,2.9,3]
-const xoffsets = [-widths[0]/2,-widths[1]/2,-widths[2]/2,-widths[3]/2]
-const yoffsets = [0,0,0,0]
-
 var Tex = textureloader.load(patterns[PatNo]);
 Tex.wrapS = THREE.RepeatWrapping;
 Tex.wrapT = THREE.RepeatWrapping;
-Tex.offset.set(xoffsets[3],yoffsets[3]);
+Tex.offset.set(-1.55/2,0);
 Tex.rotation = Math.PI/2
-Tex.repeat.set(widths[3], heights[3]);
+Tex.repeat.set(1.55, 3);
 
 var TexMirror = textureloader.load(patterns[PatNo]);
 TexMirror.wrapS = THREE.RepeatWrapping;
 TexMirror.wrapT = THREE.RepeatWrapping;
-TexMirror.offset.set(-xoffsets[3],yoffsets[3]);
+TexMirror.offset.set(1.55/2,0);
 TexMirror.rotation = Math.PI/2
-TexMirror.repeat.set(-widths[3], heights[3]);
+TexMirror.repeat.set(-1.55, 3);
 
 var doorMat = new THREE.MeshStandardMaterial({roughness: 0.5})
 var doorMatMirror = new THREE.MeshStandardMaterial({roughness: 0.5})
@@ -326,9 +321,17 @@ const URLFinder = function (){
 	}
 }
 
+	var widths = []
+	var heights = []
+	var xoffsets = []
+	var xoffsetsMirror = []
+	var yoffsets = []
+
 const Update = function () {
-   	doorWidth = parseFloat(document.getElementById("doorWidth").value);
+   	//Collect door height and width
+	doorWidth = parseFloat(document.getElementById("doorWidth").value);
    	doorHeight = parseFloat(document.getElementById("doorHeight").value);
+	//Error checking
 	if (isNaN(doorWidth)) {
 		document.getElementById("doorWidth").value = 34
 		doorWidth = 34
@@ -345,14 +348,24 @@ const Update = function () {
 		document.getElementById("doorWidth").value = 75
 		doorWidth = 75
 		alert("Doorwidths greater than 75\" (1905 mm) are not supported")
+	} else if (doorHeight > 90){
+		document.getElementById("doorHeight").value = 90
+		doorHeight = 90
+		alert("Door heights greater than 90\" (2286 mm) are not supported")
+	} else if (doorHeight < 60){
+		document.getElementById("doorHeight").value = 60
+		doorHeight = 60
+		alert("Door heights less than 60\" (1524 mm) are not supported")
 	}
 	if (document.getElementById("inmm").value == "mm"){
 		doorWidth = Math.round(doorWidth/25.4*100)/100;
 		doorHeight = Math.round(doorHeight/25.4*100)/100;
 	}
+
+	//move geometry
    	strut1.scale.y = doorHeight/80;
 	strut2.scale.y = doorHeight/80;
-	rail.scale.x = (doorWidth+4)/(38);
+	rail.scale.x = (doorWidth+4)/(40);
 	strut1.position.x += -(doorWidth - CurrentdoorWidth)/2;
 	Door.position.x += -(doorWidth - CurrentdoorWidth)/2;
 	Bind.position.x += -(doorWidth - CurrentdoorWidth)/2;
@@ -376,22 +389,47 @@ const Update = function () {
 			
 	CurrentdoorHeight = doorHeight;
    	CurrentdoorWidth = doorWidth;
-	
-	if (PatNo != CurPatNo){
+
+	//find texture offsets and repeats
+	if (URLFinder()[2] == "standard" && document.getElementById("extended").checked != true){
+		widths = [1.178,1.3,1.426,1.55]
+		heights = [2.7,2.8,2.9,3]
+		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		yoffsets = [0,0,0,0]
+	} else if (URLFinder()[2] == "standard" && document.getElementById("extended").checked){
+		widths = [1.178,1.3,1.426,1.55]
+		heights = [2.83,2.93,3.04,3.14]
+		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		yoffsets = [0,0,0,0]
+	} else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked != true){
 		console.log("ran")
+		widths = [1.178,1.3,1.426,1.55]
+		heights = [2.7,2.8,2.9,3]
+		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		xoffsetsMirror = [widths[0]/2-0.2,widths[1]/2-0.2,widths[2]/2-0.2,widths[3]/2-0.2]
+		yoffsets = [0,0,0,0]
+	} else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked){
+		widths = [1.178,1.3,1.426,1.55]
+		heights = [2.83,2.93,3.04,3.14]
+		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		xoffsetsMirror = [widths[0]/2-0.2,widths[1]/2-0.2,widths[2]/2-0.2,widths[3]/2-0.2]
+		yoffsets = [0,0,0,0]
+	}
+
+	if (PatNo != CurPatNo){
 		Tex = textureloader.load(patterns[PatNo]);
 		Tex.wrapS = THREE.RepeatWrapping;
 		Tex.wrapT = THREE.RepeatWrapping;
-		Tex.offset.set(xoffsets[3],yoffsets[3]);
+		Tex.offset.set(xoffsets[URLFinder()[3]],yoffsets[URLFinder()[3]]);
 		Tex.rotation = Math.PI/2
-		Tex.repeat.set(widths[3], heights[3]);
+		Tex.repeat.set(widths[URLFinder()[3]], heights[URLFinder()[3]]);
 
 		TexMirror = textureloader.load(patterns[PatNo]);
 		TexMirror.wrapS = THREE.RepeatWrapping;
 		TexMirror.wrapT = THREE.RepeatWrapping;
-		TexMirror.offset.set(-xoffsets[3],yoffsets[3]);
+		TexMirror.offset.set(xoffsetsMirror[URLFinder()[3]],yoffsets[URLFinder()[3]]);
 		TexMirror.rotation = Math.PI/2
-		TexMirror.repeat.set(-widths[3], heights[3]);
+		TexMirror.repeat.set(-widths[URLFinder()[3]], heights[URLFinder()[3]]);
 		
 		doorMat.map = Tex;
 		doorMatMirror.map = TexMirror;
@@ -400,7 +438,6 @@ const Update = function () {
 	}
 
 	if (BindNo != CurBindNo){
-		console.log("ran")
 		doorBindMat.color.set(bindings[BindNo])
 		CurBindNo = BindNo
 	}
@@ -414,6 +451,8 @@ const Update = function () {
 
 		Tex.offset.set(xoffsets[CurrentSize],yoffsets[CurrentSize]);
 		Tex.repeat.set(widths[CurrentSize], heights[CurrentSize]);
+		TexMirror.repeat.set(widths[CurrentSize], heights[CurrentSize])
+		TexMirror.offset.set(xoffsetsMirror[CurrentSize],yoffsets[CurrentSize])
 
 		objloader.load(URLFinder()[0].href, function(obj){
 			Door = obj;
@@ -452,7 +491,7 @@ const Update = function () {
 			console.error(error)
 		});	
 		if (URLFinder()[2] == "saloon"){
-			TexMirror.offset.set(-2*xoffsets[CurrentSize],yoffsets[CurrentSize]);
+			TexMirror.offset.set(xoffsetsMirror[CurrentSize],yoffsets[CurrentSize]);
 			TexMirror.repeat.set(-widths[CurrentSize], heights[CurrentSize]);
 			objloader.load(URLFinder()[0].href, function(obj){
 				DoorMirror = obj;
