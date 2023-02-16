@@ -4,22 +4,149 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kennon Door Configurator</title>
-		<style>
-			body { margin: 0; }
-		</style>
 	</head>
+	<style>
+	#DoorCanvas {
+    padding-left: 0;
+    padding-right: 0;
+	padding-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+	margin-bottom: 10;
+    display: block;
+    width: 800px;
+	}
+	.patternbutton{
+	padding: 0;
+	border: none;
+	background: none;
+	}
+	.bindingbutton{
+	padding: 0;
+	border: none;
+	background: none;
+	}
+	body { font-size: 80%; font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; }
+	ul#tabs { list-style-type: none; margin: 30px 0 0 0; padding: 0 0 0.3em 0; }
+	ul#tabs li { display: inline; }
+	ul#tabs li a { color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; }
+	ul#tabs li a:hover { background-color: #f1f0ee; }
+	ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
+	div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
+	div.tabContent.hide { display: none; }
+	</style>
 	<body>
-		<label for="doorWidth">Width</label>
-		<input type="number" id="doorWidth" value="34">
-		<label for="doorHeight">Height</label>
-		<input type="number" id="doorHeight" value="80">
-		<select name="inmm" id="inmm">
-			<option value="in">in</option>
-			<option value="mm">mm</option>
-		</select>
+		<script src="./js/Options.js" type="module" id="OptionsScript"></script>
 		<div>
-			<input type="checkbox" id="extended" name="extended" value="extended">
-			<label for="extended">Extended Style</label>
+			<script src="./js/ThreeDoor.js" type="module"></script>
+			<canvas id="DoorCanvas" width="600" height="400" style="border:2px solid     #000000;">No canvas support</canvas>
+		</div>
+		<ul id="tabs">
+			<li><a href="#size">Size and Style</a></li>
+			<li><a href="#picture">Image</a></li>
+			<li><a href="#binding">Binding</a></li>
+		</ul>
+		<div class="tabContent" id="size">
+			<h2>Please enter the size of your doorway and select your style of door</h2>
+			<div>
+				<label for="doorWidth">Width</label>
+				<input type="number" id="doorWidth" value="34">
+				<label for="doorHeight">Height</label>
+				<input type="number" id="doorHeight" value="80"></div>
+				<select name="inmm" id="inmm">
+					<option value="in">in</option>
+					<option value="mm">mm</option>
+				</select>
+				<div>
+					<input type="checkbox" id="extended" name="extended">
+					<label for="extended">Extended Style</label>
+				</div>
+			</div>
+		</div>
+		<div class="tabContent" id="picture">
+			<h2>Please choose a pattern, photograph or color for your door</h2>
+			<div style="height:300px;overflow:auto;">
+				<button type="pattern" id="Pat03" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-03-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat04" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-04-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat05" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-05-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat06" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-06-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat07" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-07-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat08" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-08-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat09" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-09-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Pat10" class="patternbutton">
+					<img src="./assets/Kennon_DoorPattern-10-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock01" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock01-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock02" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock02-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock03" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock03-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock04" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock04-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock05" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock05-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock06" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock06-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock07" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock07-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock08" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock08-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="Stock09" class="patternbutton">
+					<img src="./assets/KennonDoor_Stock09-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="SolWhite" class="patternbutton">
+					<img src="./assets/KennonDoor_Solid-white-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="SolCharcoal" class="patternbutton">
+					<img src="./assets/KennonDoor_Solid-charcoal-215x300.jpg"/>
+				</button>
+				<button type="pattern" id="SolBeige" class="patternbutton">
+					<img src="./assets/KennonDoor_Solid-beige-215x300.jpg"/>
+				</button>
+			</div>
+		</div>
+		<div class="tabContent" id="binding">
+			<h2>Please choose a color for the binding of your door</h2>
+			<div style="height:300px;overflow:auto;">
+				<button type="binding" id="BindBlack" class="bindingbutton">
+					<img src="./assets/binding_colors_black.jpg"/>
+				</button>
+				<button type="binding" id="BindNavy" class="bindingbutton">
+					<img src="./assets/binding_colors_navy.jpg"/>
+				</button>
+				<button type="binding" id="BindCharcoal" class="bindingbutton">
+					<img src="./assets/binding_colors_charcoal.jpg"/>
+				</button>
+				<button type="binding" id="BindGray" class="bindingbutton">
+					<img src="./assets/binding_colors_gray.jpg"/>
+				</button>
+				<button type="binding" id="BindBeige" class="bindingbutton">
+					<img src="./assets/binding_colors_beige.jpg"/>
+				</button>
+			</div>
 		</div>
 		<!--<button id="updateDoor">Update Door</button>-->
-        <script src="./js/ThreeDoor.js" type="module"></script>
+        

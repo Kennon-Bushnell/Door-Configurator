@@ -4,6 +4,34 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 //import Pat03 from '../assets/Kennon_DoorPattern-03-215x300.jpg';
 import Pat03 from '../assets/Kennon_DoorPattern-03-215x300.jpg';
+import Pat04 from '../assets/Kennon_DoorPattern-04-215x300.jpg';
+import Pat05 from '../assets/Kennon_DoorPattern-05-215x300.jpg';
+import Pat06 from '../assets/Kennon_DoorPattern-06-215x300.jpg';
+import Pat07 from '../assets/Kennon_DoorPattern-07-215x300.jpg';
+import Pat08 from '../assets/Kennon_DoorPattern-08-215x300.jpg';
+import Pat09 from '../assets/Kennon_DoorPattern-09-215x300.jpg';
+import Pat10 from '../assets/Kennon_DoorPattern-10-215x300.jpg';
+import Stock01 from '../assets/KennonDoor_Stock01-215x300.jpg';
+import Stock02 from '../assets/KennonDoor_Stock02-215x300.jpg';
+import Stock03 from '../assets/KennonDoor_Stock03-215x300.jpg';
+import Stock04 from '../assets/KennonDoor_Stock04-215x300.jpg';
+import Stock05 from '../assets/KennonDoor_Stock05-215x300.jpg';
+import Stock06 from '../assets/KennonDoor_Stock06-215x300.jpg';
+import Stock07 from '../assets/KennonDoor_Stock07-215x300.jpg';
+import Stock08 from '../assets/KennonDoor_Stock08-215x300.jpg';
+import Stock09 from '../assets/KennonDoor_Stock09-215x300.jpg';
+import solwhite from '../assets/KennonDoor_Solid-white-215x300.jpg';
+import solcharcoal from '../assets/KennonDoor_Solid-charcoal-215x300.jpg';
+import solbeige from '../assets/KennonDoor_Solid-beige-215x300.jpg';
+import { CineonToneMapping } from 'three';
+
+var PatNo = 0
+var CurPatNo = 0
+const patterns = [Pat03, Pat04, Pat05, Pat06, Pat07, Pat08, Pat09, Pat10, Stock01, Stock02, Stock03, Stock04, Stock05, Stock06, Stock07, Stock08, Stock09, solwhite, solcharcoal, solbeige]
+
+var BindNo = 0
+var CurBindNo = 0
+const bindings = ["#000000", "#070a2b", "#595959", "#bdbdbd", "#ded1a0"]
 
 //Define model URLs
 const Door2225URL = new URL('../assets/Door22-25.obj', import.meta.url);
@@ -23,18 +51,19 @@ const Bind3134URL = new URL('../assets/Bind31-34.obj', import.meta.url);
 const DoorE3134URL = new URL('../assets/DoorE31-34.obj', import.meta.url);
 const BindE3134URL = new URL('../assets/BindE31-34.obj', import.meta.url);
 
-const widths = [0.7,0.9,1.1,1.2]
-
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
+var canvas = document.getElementById("DoorCanvas");
+canvas.width = window.innerWidth * 1/3
+canvas.height = window.innerWidth * 1/5
+const camera = new THREE.PerspectiveCamera( 30, canvas.width / canvas.height, 0.1, 1000 );
 
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
 var doorHeight = parseFloat(document.getElementById("doorHeight").value);
-	
-const renderer = new THREE.WebGLRenderer();
+
+const renderer = new THREE.WebGLRenderer({ canvas: DoorCanvas});
 renderer.shadowMap.enabled = true;
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+renderer.setSize( canvas.width, canvas.height );
+//document.body.appendChild( renderer.domElement );
 			
 const objloader = new OBJLoader();
 const textureloader = new THREE.TextureLoader();
@@ -115,17 +144,30 @@ floor.position.z -= 30
 floor.receiveShadow = true;
 floor.castShadow = true;
 
+const widths = [1.178,1.3,1.426,1.55]
+const heights = [2.7,2.8,2.9,3]
+const xoffsets = [-widths[0]/2,-widths[1]/2,-widths[2]/2,-widths[3]/2]
+const yoffsets = [0,0,0,0]
+
+var Tex = textureloader.load(patterns[PatNo]);
+Tex.wrapS = THREE.RepeatWrapping;
+Tex.wrapT = THREE.RepeatWrapping;
+Tex.offset.set(xoffsets[3],yoffsets[3]);
+Tex.rotation = Math.PI/2
+Tex.repeat.set(widths[3], heights[3]);
+
+var TexMirror = textureloader.load(patterns[PatNo]);
+TexMirror.wrapS = THREE.RepeatWrapping;
+TexMirror.wrapT = THREE.RepeatWrapping;
+TexMirror.offset.set(-xoffsets[3],yoffsets[3]);
+TexMirror.rotation = Math.PI/2
+TexMirror.repeat.set(-widths[3], heights[3]);
+
 var doorMat = new THREE.MeshStandardMaterial({roughness: 0.5})
+var doorMatMirror = new THREE.MeshStandardMaterial({roughness: 0.5})
 var doorBindMat = new THREE.MeshStandardMaterial({color: "#000000"})
-const TexPat03 = textureloader.load(Pat03);
-
-TexPat03.wrapS = THREE.RepeatWrapping;
-TexPat03.wrapT = THREE.RepeatWrapping;
-TexPat03.offset.set(-0.2,-0.2)
-TexPat03.rotation = Math.PI/2
-TexPat03.repeat.set( widths[3]	, 2 );
-
-doorMat.map = TexPat03;
+doorMat.map = Tex;
+doorMatMirror.map = TexMirror;
 
 var DoorURL = Door3134URL;
 
@@ -206,9 +248,11 @@ var CurrentdoorHeight = doorHeight
 		
 		
 window.addEventListener("resize", () => {
-	camera.aspect = window.innerWidth / window.innerHeight
+	canvas.width = window.innerWidth * 1/3
+	canvas.height = window.innerWidth * 1/5
+	camera.aspect = canvas.width / canvas.height
 	camera.updateProjectionMatrix()
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( canvas.width, canvas.height );
 	renderer.render(scene, camera);
 })
 
@@ -237,19 +281,19 @@ const URLFinder = function (){
 		} else{
 			return [Door3134URL, Bind3134URL, "standard", 3]
 		}
-	} else if (doorWidth <= 54){
+	} else if (doorWidth <= 53){
 		if (document.getElementById("extended").checked){
 			return [DoorE2225URL, BindE2225URL, "saloon", 0]
 		} else{
 			return [Door2225URL, Bind2225URL, "saloon", 0]
 		}
-	} else if (doorWidth <= 60){
+	} else if (doorWidth <= 59){
 		if (document.getElementById("extended").checked){
 			return [DoorE2528URL, BindE2528URL, "saloon", 1]
 		} else{
 			return [Door2528URL, Bind2528URL, "saloon", 1]
 		}
-	} else if (doorWidth <= 66){
+	} else if (doorWidth <= 65){
 		if (document.getElementById("extended").checked){
 			return [DoorE2831URL, BindE2831URL, "saloon", 2]
 		} else{
@@ -267,6 +311,23 @@ const URLFinder = function (){
 const Update = function () {
    	doorWidth = parseFloat(document.getElementById("doorWidth").value);
    	doorHeight = parseFloat(document.getElementById("doorHeight").value);
+	if (isNaN(doorWidth)) {
+		document.getElementById("doorWidth").value = 34
+		doorWidth = 34
+		alert("Please enter a valid width")
+	} else if (isNaN(doorHeight)) {
+		document.getElementById("doorHeight").value = 80
+		doorWidth = 80
+		alert("Please enter a valid height")
+	} else if (doorWidth < 19){
+		document.getElementById("doorWidth").value = 19
+		doorWidth = 19
+		alert("Doorwidths less than 19\" (480 mm) are not supported")
+	} else if (doorWidth > 75){
+		document.getElementById("doorWidth").value = 75
+		doorWidth = 75
+		alert("Doorwidths greater than 75\" (1905 mm) are not supported")
+	}
 	if (document.getElementById("inmm").value == "mm"){
 		doorWidth = Math.round(doorWidth/25.4*100)/100;
 		doorHeight = Math.round(doorHeight/25.4*100)/100;
@@ -298,13 +359,43 @@ const Update = function () {
 	CurrentdoorHeight = doorHeight;
    	CurrentdoorWidth = doorWidth;
 	
-	console.log(URLFinder()[3])
+	if (PatNo != CurPatNo){
+		console.log("ran")
+		Tex = textureloader.load(patterns[PatNo]);
+		Tex.wrapS = THREE.RepeatWrapping;
+		Tex.wrapT = THREE.RepeatWrapping;
+		Tex.offset.set(xoffsets[3],yoffsets[3]);
+		Tex.rotation = Math.PI/2
+		Tex.repeat.set(widths[3], heights[3]);
+
+		TexMirror = textureloader.load(patterns[PatNo]);
+		TexMirror.wrapS = THREE.RepeatWrapping;
+		TexMirror.wrapT = THREE.RepeatWrapping;
+		TexMirror.offset.set(-xoffsets[3],yoffsets[3]);
+		TexMirror.rotation = Math.PI/2
+		TexMirror.repeat.set(-widths[3], heights[3]);
+		
+		doorMat.map = Tex;
+		doorMatMirror.map = TexMirror;
+		
+		CurPatNo = PatNo
+	}
+
+	if (BindNo != CurBindNo){
+		console.log("ran")
+		doorBindMat.color.set(bindings[BindNo])
+		CurBindNo = BindNo
+	}
+
 	if (CurrentSize != URLFinder()[3] || SingleSaloon != URLFinder()[2] || Extended != document.getElementById("extended").checked){
+		CurrentSize = URLFinder()[3]
 		scene.remove(Door);
 		scene.remove(DoorMirror);
 		scene.remove(Bind);
 		scene.remove(BindMirror);
-		TexPat03.repeat.set( widths[URLFinder()[3]]	, 2 );
+
+		Tex.offset.set(xoffsets[CurrentSize],yoffsets[CurrentSize]);
+		Tex.repeat.set(widths[CurrentSize], heights[CurrentSize]);
 
 		objloader.load(URLFinder()[0].href, function(obj){
 			Door = obj;
@@ -332,7 +423,7 @@ const Update = function () {
 			Bind.position.set(-doorWidth/2 - 1.8,-28 + (doorHeight-80)/2,0.85)
 			Bind.traverse(function (child) {
 				if (child instanceof THREE.Mesh) {
-					  child.material = doorBindMat
+					child.material = doorBindMat
 					child.castShadow = true;
 				}
 			  });
@@ -341,8 +432,10 @@ const Update = function () {
 			}
 		},  undefined, function (error) {
 			console.error(error)
-		});		
+		});	
 		if (URLFinder()[2] == "saloon"){
+			TexMirror.offset.set(-2*xoffsets[CurrentSize],yoffsets[CurrentSize]);
+			TexMirror.repeat.set(-widths[CurrentSize], heights[CurrentSize]);
 			objloader.load(URLFinder()[0].href, function(obj){
 				DoorMirror = obj;
 				scene.add(DoorMirror);
@@ -351,7 +444,7 @@ const Update = function () {
 				DoorMirror.position.set(doorWidth/2 + 1.8,-28 + (doorHeight-80)/2,0.85)
 				DoorMirror.traverse(function (child) {
 					if (child instanceof THREE.Mesh) {
-						  child.material = doorMat
+						  child.material = doorMatMirror
 						
 						child.castShadow = true;
 					}
@@ -383,7 +476,6 @@ const Update = function () {
 			});	
 		}
 		Extended = document.getElementById("extended").checked
-		CurrentSize = URLFinder()[3]
 		SingleSaloon = URLFinder()[2]
 	} else{
 		renderer.render(scene, camera);
@@ -407,6 +499,57 @@ document.getElementById("doorWidth").addEventListener("change", Update);
 document.getElementById("doorHeight").addEventListener("change", Update);
 document.getElementById("extended").addEventListener("change", Update);
 document.getElementById("inmm").addEventListener("change", intomm);
+document.getElementById("Pat03").addEventListener("click", function(){PatNo = 0});
+document.getElementById("Pat03").addEventListener("click", Update);
+document.getElementById("Pat04").addEventListener("click", function(){PatNo = 1});
+document.getElementById("Pat04").addEventListener("click", Update);
+document.getElementById("Pat05").addEventListener("click", function(){PatNo = 2});
+document.getElementById("Pat05").addEventListener("click", Update);
+document.getElementById("Pat06").addEventListener("click", function(){PatNo = 3});
+document.getElementById("Pat06").addEventListener("click", Update);
+document.getElementById("Pat07").addEventListener("click", function(){PatNo = 4});
+document.getElementById("Pat07").addEventListener("click", Update);
+document.getElementById("Pat08").addEventListener("click", function(){PatNo = 5});
+document.getElementById("Pat08").addEventListener("click", Update);
+document.getElementById("Pat09").addEventListener("click", function(){PatNo = 6});
+document.getElementById("Pat09").addEventListener("click", Update);
+document.getElementById("Pat10").addEventListener("click", function(){PatNo = 7});
+document.getElementById("Pat10").addEventListener("click", Update);
+document.getElementById("Stock01").addEventListener("click", function(){PatNo = 8});
+document.getElementById("Stock01").addEventListener("click", Update);
+document.getElementById("Stock02").addEventListener("click", function(){PatNo = 9});
+document.getElementById("Stock02").addEventListener("click", Update);
+document.getElementById("Stock03").addEventListener("click", function(){PatNo = 10});
+document.getElementById("Stock03").addEventListener("click", Update);
+document.getElementById("Stock04").addEventListener("click", function(){PatNo = 11});
+document.getElementById("Stock04").addEventListener("click", Update);
+document.getElementById("Stock05").addEventListener("click", function(){PatNo = 12});
+document.getElementById("Stock05").addEventListener("click", Update);
+document.getElementById("Stock06").addEventListener("click", function(){PatNo = 13});
+document.getElementById("Stock06").addEventListener("click", Update);
+document.getElementById("Stock07").addEventListener("click", function(){PatNo = 14});
+document.getElementById("Stock07").addEventListener("click", Update);
+document.getElementById("Stock08").addEventListener("click", function(){PatNo = 15});
+document.getElementById("Stock08").addEventListener("click", Update);
+document.getElementById("Stock09").addEventListener("click", function(){PatNo = 16});
+document.getElementById("Stock09").addEventListener("click", Update);
+document.getElementById("SolWhite").addEventListener("click", function(){PatNo = 17});
+document.getElementById("SolWhite").addEventListener("click", Update);
+document.getElementById("SolCharcoal").addEventListener("click", function(){PatNo = 18});
+document.getElementById("SolCharcoal").addEventListener("click", Update);
+document.getElementById("SolBeige").addEventListener("click", function(){PatNo = 19});
+document.getElementById("SolBeige").addEventListener("click", Update);
+
+document.getElementById("BindBlack").addEventListener("click", function(){BindNo = 0});
+document.getElementById("BindBlack").addEventListener("click", Update);
+document.getElementById("BindNavy").addEventListener("click", function(){BindNo = 1});
+document.getElementById("BindNavy").addEventListener("click", Update);
+document.getElementById("BindCharcoal").addEventListener("click", function(){BindNo = 2});
+document.getElementById("BindCharcoal").addEventListener("click", Update);
+document.getElementById("BindGray").addEventListener("click", function(){BindNo = 3});
+document.getElementById("BindGray").addEventListener("click", Update);
+document.getElementById("BindBeige").addEventListener("click", function(){BindNo = 4});
+document.getElementById("BindBeige").addEventListener("click", Update);
 
 const animate = function () {
    	requestAnimationFrame(animate);
