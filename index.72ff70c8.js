@@ -652,11 +652,30 @@ const Door3134URL = new URL(require("f19bcb3bf5982bb6"));
 const Bind3134URL = new URL(require("f3f642acf0461ef6"));
 const DoorE3134URL = new URL(require("42cf8adef48e271f"));
 const BindE3134URL = new URL(require("f5a5ba31e26a3ed7"));
+const DoorS2225URL = new URL(require("33cd767818602823"));
+const BindS2225URL = new URL(require("2ea4c4ad99690eaf"));
+const DoorES2225URL = new URL(require("140e6cea45cff390"));
+const BindES2225URL = new URL(require("6196d32e673ca18e"));
+const DoorS2528URL = new URL(require("5b5b0584a3bfc4ad"));
+const BindS2528URL = new URL(require("5d1e860ad3f85b3c"));
+const DoorES2528URL = new URL(require("ae13caebf697414c"));
+const BindES2528URL = new URL(require("84c989ac0301b865"));
+const DoorS2831URL = new URL(require("138a6069f6608813"));
+const BindS2831URL = new URL(require("c21856120640f1eb"));
+const DoorES2831URL = new URL(require("5096d46dafc9167c"));
+const BindES2831URL = new URL(require("5a276617f2cbece"));
+const DoorS3134URL = new URL(require("b70cd30be5a3a7c9"));
+const BindS3134URL = new URL(require("c2fae0b72f8a25be"));
+const DoorES3134URL = new URL(require("2d371f4e92ec3783"));
+const BindES3134URL = new URL(require("8d1ce76699706ecf"));
 const scene = new _three.Scene();
 var canvas = document.getElementById("DoorCanvas");
-canvas.width = window.innerWidth * 1 / 3;
-canvas.height = window.innerWidth * 1 / 5;
+canvas.width = window.innerWidth * 2 / 3;
+canvas.height = window.innerWidth * 1 / 3;
 const camera = new _three.PerspectiveCamera(30, canvas.width / canvas.height, 0.1, 1000);
+camera.position.set(0, 10, 200);
+camera.lookAt(0, 10, 0);
+//const orbit = new OrbitControls(camera, renderer.domElement)
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
 var doorHeight = parseFloat(document.getElementById("doorHeight").value);
 const renderer = new _three.WebGLRenderer({
@@ -822,8 +841,6 @@ objloader.load(BindURL.href, function(obj) {
 }, undefined, function(error) {
     console.error(error);
 });
-camera.position.z = 200;
-const orbit = new (0, _orbitControls.OrbitControls)(camera, renderer.domElement);
 const light = new _three.PointLight(0xffffff, 1, 800);
 light.position.set(75, 60, 200);
 light.castShadow = true;
@@ -842,15 +859,15 @@ scene.add(amblight);
 var CurrentdoorWidth = doorWidth;
 var CurrentdoorHeight = doorHeight;
 window.addEventListener("resize", ()=>{
-    canvas.width = window.innerWidth * 1 / 3;
-    canvas.height = window.innerWidth * 1 / 5;
+    canvas.width = window.innerWidth * 2 / 3;
+    canvas.height = window.innerWidth * 1 / 3;
     camera.aspect = canvas.width / canvas.height;
     camera.updateProjectionMatrix();
     renderer.setSize(canvas.width, canvas.height);
     renderer.render(scene, camera);
 });
 const URLFinder = function() {
-    if (doorWidth <= 25) {
+    if (doorWidth <= 28) {
         if (document.getElementById("extended").checked) return [
             DoorE2225URL,
             BindE2225URL,
@@ -863,7 +880,7 @@ const URLFinder = function() {
             "standard",
             0
         ];
-    } else if (doorWidth <= 28) {
+    } else if (doorWidth <= 31) {
         if (document.getElementById("extended").checked) return [
             DoorE2528URL,
             BindE2528URL,
@@ -876,7 +893,7 @@ const URLFinder = function() {
             "standard",
             1
         ];
-    } else if (doorWidth <= 31) {
+    } else if (doorWidth <= 34) {
         if (document.getElementById("extended").checked) return [
             DoorE2831URL,
             BindE2831URL,
@@ -889,7 +906,7 @@ const URLFinder = function() {
             "standard",
             2
         ];
-    } else if (doorWidth <= 34) {
+    } else if (doorWidth <= 37) {
         if (document.getElementById("extended").checked) return [
             DoorE3134URL,
             BindE3134URL,
@@ -902,55 +919,55 @@ const URLFinder = function() {
             "standard",
             3
         ];
-    } else if (doorWidth <= 53) {
+    } else if (doorWidth <= 57) {
         if (document.getElementById("extended").checked) return [
-            DoorE2225URL,
-            BindE2225URL,
+            DoorES2225URL,
+            BindES2225URL,
             "saloon",
             0
         ];
         else return [
-            Door2225URL,
-            Bind2225URL,
+            DoorS2225URL,
+            BindS2225URL,
             "saloon",
             0
         ];
-    } else if (doorWidth <= 59) {
+    } else if (doorWidth <= 64) {
         if (document.getElementById("extended").checked) return [
-            DoorE2528URL,
-            BindE2528URL,
+            DoorES2528URL,
+            BindES2528URL,
             "saloon",
             1
         ];
         else return [
-            Door2528URL,
-            Bind2528URL,
+            DoorS2528URL,
+            BindS2528URL,
             "saloon",
             1
         ];
-    } else if (doorWidth <= 65) {
+    } else if (doorWidth <= 69) {
         if (document.getElementById("extended").checked) return [
-            DoorE2831URL,
-            BindE2831URL,
+            DoorES2831URL,
+            BindES2831URL,
             "saloon",
             2
         ];
         else return [
-            Door2831URL,
-            Bind2831URL,
+            DoorS2831URL,
+            BindS2831URL,
             "saloon",
             2
         ];
     } else {
         if (document.getElementById("extended").checked) return [
-            DoorE3134URL,
-            BindE3134URL,
+            DoorES3134URL,
+            BindES3134URL,
             "saloon",
             3
         ];
         else return [
-            Door3134URL,
-            Bind3134URL,
+            DoorS3134URL,
+            BindS3134URL,
             "saloon",
             3
         ];
@@ -1116,118 +1133,121 @@ const intomm = function() {
     }
     Update;
 };
-//document.getElementById("updateDoor").addEventListener("click", Update);
+//Listen for door size change
 document.getElementById("doorWidth").addEventListener("change", Update);
 document.getElementById("doorHeight").addEventListener("change", Update);
 document.getElementById("extended").addEventListener("change", Update);
+//Listen for inches to mm change
 document.getElementById("inmm").addEventListener("change", intomm);
+//Listen for pattern change
 document.getElementById("Pat03").addEventListener("click", function() {
     PatNo = 0;
+    Update();
 });
-document.getElementById("Pat03").addEventListener("click", Update);
 document.getElementById("Pat04").addEventListener("click", function() {
     PatNo = 1;
+    Update();
 });
-document.getElementById("Pat04").addEventListener("click", Update);
 document.getElementById("Pat05").addEventListener("click", function() {
     PatNo = 2;
+    Update();
 });
-document.getElementById("Pat05").addEventListener("click", Update);
 document.getElementById("Pat06").addEventListener("click", function() {
     PatNo = 3;
+    Update();
 });
-document.getElementById("Pat06").addEventListener("click", Update);
 document.getElementById("Pat07").addEventListener("click", function() {
     PatNo = 4;
+    Update();
 });
-document.getElementById("Pat07").addEventListener("click", Update);
 document.getElementById("Pat08").addEventListener("click", function() {
     PatNo = 5;
+    Update();
 });
-document.getElementById("Pat08").addEventListener("click", Update);
 document.getElementById("Pat09").addEventListener("click", function() {
     PatNo = 6;
+    Update();
 });
-document.getElementById("Pat09").addEventListener("click", Update);
 document.getElementById("Pat10").addEventListener("click", function() {
     PatNo = 7;
+    Update();
 });
-document.getElementById("Pat10").addEventListener("click", Update);
 document.getElementById("Stock01").addEventListener("click", function() {
     PatNo = 8;
+    Update();
 });
-document.getElementById("Stock01").addEventListener("click", Update);
 document.getElementById("Stock02").addEventListener("click", function() {
     PatNo = 9;
+    Update();
 });
-document.getElementById("Stock02").addEventListener("click", Update);
 document.getElementById("Stock03").addEventListener("click", function() {
     PatNo = 10;
+    Update();
 });
-document.getElementById("Stock03").addEventListener("click", Update);
 document.getElementById("Stock04").addEventListener("click", function() {
     PatNo = 11;
+    Update();
 });
-document.getElementById("Stock04").addEventListener("click", Update);
 document.getElementById("Stock05").addEventListener("click", function() {
     PatNo = 12;
+    Update();
 });
-document.getElementById("Stock05").addEventListener("click", Update);
 document.getElementById("Stock06").addEventListener("click", function() {
     PatNo = 13;
+    Update();
 });
-document.getElementById("Stock06").addEventListener("click", Update);
 document.getElementById("Stock07").addEventListener("click", function() {
     PatNo = 14;
+    Update();
 });
-document.getElementById("Stock07").addEventListener("click", Update);
 document.getElementById("Stock08").addEventListener("click", function() {
     PatNo = 15;
+    Update();
 });
-document.getElementById("Stock08").addEventListener("click", Update);
 document.getElementById("Stock09").addEventListener("click", function() {
     PatNo = 16;
+    Update();
 });
-document.getElementById("Stock09").addEventListener("click", Update);
 document.getElementById("SolWhite").addEventListener("click", function() {
     PatNo = 17;
+    Update();
 });
-document.getElementById("SolWhite").addEventListener("click", Update);
 document.getElementById("SolCharcoal").addEventListener("click", function() {
     PatNo = 18;
+    Update();
 });
-document.getElementById("SolCharcoal").addEventListener("click", Update);
 document.getElementById("SolBeige").addEventListener("click", function() {
     PatNo = 19;
+    Update();
 });
-document.getElementById("SolBeige").addEventListener("click", Update);
+//Listen for binding change
 document.getElementById("BindBlack").addEventListener("click", function() {
     BindNo = 0;
+    Update();
 });
-document.getElementById("BindBlack").addEventListener("click", Update);
 document.getElementById("BindNavy").addEventListener("click", function() {
     BindNo = 1;
+    Update();
 });
-document.getElementById("BindNavy").addEventListener("click", Update);
 document.getElementById("BindCharcoal").addEventListener("click", function() {
     BindNo = 2;
+    Update();
 });
-document.getElementById("BindCharcoal").addEventListener("click", Update);
 document.getElementById("BindGray").addEventListener("click", function() {
     BindNo = 3;
+    Update();
 });
-document.getElementById("BindGray").addEventListener("click", Update);
 document.getElementById("BindBeige").addEventListener("click", function() {
     BindNo = 4;
+    Update();
 });
-document.getElementById("BindBeige").addEventListener("click", Update);
 const animate = function() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 };
 animate();
 
-},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","../assets/Kennon_DoorPattern-04-215x300.jpg":"3KeWv","../assets/Kennon_DoorPattern-05-215x300.jpg":"ezzSA","../assets/Kennon_DoorPattern-06-215x300.jpg":"glWZW","../assets/Kennon_DoorPattern-07-215x300.jpg":"8FDyi","../assets/Kennon_DoorPattern-08-215x300.jpg":"2bPpU","../assets/Kennon_DoorPattern-09-215x300.jpg":"cJ1xP","../assets/Kennon_DoorPattern-10-215x300.jpg":"eUgux","../assets/KennonDoor_Stock01-215x300.jpg":"e1mKl","../assets/KennonDoor_Stock02-215x300.jpg":"8Jkvh","../assets/KennonDoor_Stock03-215x300.jpg":"13QZl","../assets/KennonDoor_Stock04-215x300.jpg":"8k1W4","../assets/KennonDoor_Stock05-215x300.jpg":"3dB2B","../assets/KennonDoor_Stock06-215x300.jpg":"53Gp4","../assets/KennonDoor_Stock07-215x300.jpg":"4Y6To","../assets/KennonDoor_Stock08-215x300.jpg":"k8TbE","../assets/KennonDoor_Stock09-215x300.jpg":"ca3UX","../assets/KennonDoor_Solid-white-215x300.jpg":"lgFuk","../assets/KennonDoor_Solid-charcoal-215x300.jpg":"8X7D5","../assets/KennonDoor_Solid-beige-215x300.jpg":"lS73n","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","../assets/Kennon_DoorPattern-04-215x300.jpg":"3KeWv","../assets/Kennon_DoorPattern-05-215x300.jpg":"ezzSA","../assets/Kennon_DoorPattern-06-215x300.jpg":"glWZW","../assets/Kennon_DoorPattern-07-215x300.jpg":"8FDyi","../assets/Kennon_DoorPattern-08-215x300.jpg":"2bPpU","../assets/Kennon_DoorPattern-09-215x300.jpg":"cJ1xP","../assets/Kennon_DoorPattern-10-215x300.jpg":"eUgux","../assets/KennonDoor_Stock01-215x300.jpg":"e1mKl","../assets/KennonDoor_Stock02-215x300.jpg":"8Jkvh","../assets/KennonDoor_Stock03-215x300.jpg":"13QZl","../assets/KennonDoor_Stock04-215x300.jpg":"8k1W4","../assets/KennonDoor_Stock05-215x300.jpg":"3dB2B","../assets/KennonDoor_Stock06-215x300.jpg":"53Gp4","../assets/KennonDoor_Stock07-215x300.jpg":"4Y6To","../assets/KennonDoor_Stock08-215x300.jpg":"k8TbE","../assets/KennonDoor_Stock09-215x300.jpg":"ca3UX","../assets/KennonDoor_Solid-white-215x300.jpg":"lgFuk","../assets/KennonDoor_Solid-charcoal-215x300.jpg":"8X7D5","../assets/KennonDoor_Solid-beige-215x300.jpg":"lS73n","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","33cd767818602823":"cRA9d","2ea4c4ad99690eaf":"5Diqo","140e6cea45cff390":"dZdOw","6196d32e673ca18e":"ix4Fu","5b5b0584a3bfc4ad":"af3wy","5d1e860ad3f85b3c":"jYAPw","ae13caebf697414c":"LUyj3","84c989ac0301b865":"5PCMN","138a6069f6608813":"aPNJj","c21856120640f1eb":"k9wq8","5096d46dafc9167c":"iWcp2","5a276617f2cbece":"dR9pw","b70cd30be5a3a7c9":"7Ifsq","c2fae0b72f8a25be":"dECQ7","2d371f4e92ec3783":"ffAyk","8d1ce76699706ecf":"9EGmb"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2023 Three.js Authors
@@ -31828,6 +31848,54 @@ module.exports = require("1aac094527ee5b08").getBundleURL("lp3gw") + "DoorE31-34
 },{"1aac094527ee5b08":"lgJ39"}],"llRmS":[function(require,module,exports) {
 module.exports = require("ab3a64c4b77a63cc").getBundleURL("lp3gw") + "BindE31-34.40187dc5.obj" + "?" + Date.now();
 
-},{"ab3a64c4b77a63cc":"lgJ39"}]},["ht6sX","eWgaw"], "eWgaw", "parcelRequireebc3")
+},{"ab3a64c4b77a63cc":"lgJ39"}],"cRA9d":[function(require,module,exports) {
+module.exports = require("ea12e48bb6684227").getBundleURL("lp3gw") + "DoorS22-25.ce0823ed.obj" + "?" + Date.now();
+
+},{"ea12e48bb6684227":"lgJ39"}],"5Diqo":[function(require,module,exports) {
+module.exports = require("80095fc25b155ad1").getBundleURL("lp3gw") + "BindS22-25.e0f70012.obj" + "?" + Date.now();
+
+},{"80095fc25b155ad1":"lgJ39"}],"dZdOw":[function(require,module,exports) {
+module.exports = require("30ba90188e093839").getBundleURL("lp3gw") + "DoorES22-25.1376255f.obj" + "?" + Date.now();
+
+},{"30ba90188e093839":"lgJ39"}],"ix4Fu":[function(require,module,exports) {
+module.exports = require("d6054706b1a961bc").getBundleURL("lp3gw") + "BindES22-25.643a0773.obj" + "?" + Date.now();
+
+},{"d6054706b1a961bc":"lgJ39"}],"af3wy":[function(require,module,exports) {
+module.exports = require("891d48e914f6cd83").getBundleURL("lp3gw") + "DoorS25-28.9161970e.obj" + "?" + Date.now();
+
+},{"891d48e914f6cd83":"lgJ39"}],"jYAPw":[function(require,module,exports) {
+module.exports = require("ddb0559f42d93a5d").getBundleURL("lp3gw") + "BindS25-28.17d7d965.obj" + "?" + Date.now();
+
+},{"ddb0559f42d93a5d":"lgJ39"}],"LUyj3":[function(require,module,exports) {
+module.exports = require("b3e51b4cfda5fed0").getBundleURL("lp3gw") + "DoorES25-28.7cd7b300.obj" + "?" + Date.now();
+
+},{"b3e51b4cfda5fed0":"lgJ39"}],"5PCMN":[function(require,module,exports) {
+module.exports = require("f244e93d4cbb3863").getBundleURL("lp3gw") + "BindES25-28.d337399f.obj" + "?" + Date.now();
+
+},{"f244e93d4cbb3863":"lgJ39"}],"aPNJj":[function(require,module,exports) {
+module.exports = require("aec89124378357d1").getBundleURL("lp3gw") + "DoorS28-31.195816d6.obj" + "?" + Date.now();
+
+},{"aec89124378357d1":"lgJ39"}],"k9wq8":[function(require,module,exports) {
+module.exports = require("3f97999c7d6ee51a").getBundleURL("lp3gw") + "BindS28-31.1fdaa91c.obj" + "?" + Date.now();
+
+},{"3f97999c7d6ee51a":"lgJ39"}],"iWcp2":[function(require,module,exports) {
+module.exports = require("d498aaffe305d422").getBundleURL("lp3gw") + "DoorES28-31.25f7320e.obj" + "?" + Date.now();
+
+},{"d498aaffe305d422":"lgJ39"}],"dR9pw":[function(require,module,exports) {
+module.exports = require("aa971401935f8777").getBundleURL("lp3gw") + "BindES28-31.1f6efaa2.obj" + "?" + Date.now();
+
+},{"aa971401935f8777":"lgJ39"}],"7Ifsq":[function(require,module,exports) {
+module.exports = require("bb07dc25a3eabc54").getBundleURL("lp3gw") + "DoorS31-34.67a46535.obj" + "?" + Date.now();
+
+},{"bb07dc25a3eabc54":"lgJ39"}],"dECQ7":[function(require,module,exports) {
+module.exports = require("680159ddb5e13b86").getBundleURL("lp3gw") + "BindS31-34.c8af5c9d.obj" + "?" + Date.now();
+
+},{"680159ddb5e13b86":"lgJ39"}],"ffAyk":[function(require,module,exports) {
+module.exports = require("60b90800b9359cfd").getBundleURL("lp3gw") + "DoorES31-34.163fac9b.obj" + "?" + Date.now();
+
+},{"60b90800b9359cfd":"lgJ39"}],"9EGmb":[function(require,module,exports) {
+module.exports = require("3673c32eea8d0fa2").getBundleURL("lp3gw") + "BindES31-34.eedc6dfc.obj" + "?" + Date.now();
+
+},{"3673c32eea8d0fa2":"lgJ39"}]},["ht6sX","eWgaw"], "eWgaw", "parcelRequireebc3")
 
 //# sourceMappingURL=index.72ff70c8.js.map
