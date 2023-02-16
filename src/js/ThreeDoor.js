@@ -50,12 +50,33 @@ const Door3134URL = new URL('../assets/Door31-34.obj', import.meta.url);
 const Bind3134URL = new URL('../assets/Bind31-34.obj', import.meta.url);
 const DoorE3134URL = new URL('../assets/DoorE31-34.obj', import.meta.url);
 const BindE3134URL = new URL('../assets/BindE31-34.obj', import.meta.url);
+const DoorS2225URL = new URL('../assets/DoorS22-25.obj', import.meta.url);
+const BindS2225URL = new URL('../assets/BindS22-25.obj', import.meta.url);
+const DoorES2225URL = new URL('../assets/DoorES22-25.obj', import.meta.url);
+const BindES2225URL = new URL('../assets/BindES22-25.obj', import.meta.url);
+const DoorS2528URL = new URL('../assets/DoorS25-28.obj', import.meta.url);
+const BindS2528URL = new URL('../assets/BindS25-28.obj', import.meta.url);
+const DoorES2528URL = new URL('../assets/DoorES25-28.obj', import.meta.url);
+const BindES2528URL = new URL('../assets/BindES25-28.obj', import.meta.url);
+const DoorS2831URL = new URL('../assets/DoorS28-31.obj', import.meta.url);
+const BindS2831URL = new URL('../assets/BindS28-31.obj', import.meta.url);
+const DoorES2831URL = new URL('../assets/DoorES28-31.obj', import.meta.url);
+const BindES2831URL = new URL('../assets/BindES28-31.obj', import.meta.url);
+const DoorS3134URL = new URL('../assets/DoorS31-34.obj', import.meta.url);
+const BindS3134URL = new URL('../assets/BindS31-34.obj', import.meta.url);
+const DoorES3134URL = new URL('../assets/DoorES31-34.obj', import.meta.url);
+const BindES3134URL = new URL('../assets/BindES31-34.obj', import.meta.url);
 
 const scene = new THREE.Scene();
 var canvas = document.getElementById("DoorCanvas");
-canvas.width = window.innerWidth * 1/3
-canvas.height = window.innerWidth * 1/5
+canvas.width = window.innerWidth * 2/3
+canvas.height = window.innerWidth * 1/3
 const camera = new THREE.PerspectiveCamera( 30, canvas.width / canvas.height, 0.1, 1000 );
+
+camera.position.set(0,10,200);
+camera.lookAt(0,10,0)
+//const orbit = new OrbitControls(camera, renderer.domElement)
+
 
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
 var doorHeight = parseFloat(document.getElementById("doorHeight").value);
@@ -220,9 +241,6 @@ objloader.load(BindURL.href, function(obj){
 });
 
 
-camera.position.z = 200;
-const orbit = new OrbitControls(camera, renderer.domElement)
-
 const light = new THREE.PointLight(0xffffff, 1, 800);
 light.position.set(75, 60, 200);
 light.castShadow = true;
@@ -248,8 +266,8 @@ var CurrentdoorHeight = doorHeight
 		
 		
 window.addEventListener("resize", () => {
-	canvas.width = window.innerWidth * 1/3
-	canvas.height = window.innerWidth * 1/5
+	canvas.width = window.innerWidth * 2/3
+	canvas.height = window.innerWidth * 1/3
 	camera.aspect = canvas.width / canvas.height
 	camera.updateProjectionMatrix()
 	renderer.setSize( canvas.width, canvas.height );
@@ -257,53 +275,53 @@ window.addEventListener("resize", () => {
 })
 
 const URLFinder = function (){
-	if (doorWidth <= 25){
+	if (doorWidth <= 28){
 		if (document.getElementById("extended").checked){
 			return [DoorE2225URL, BindE2225URL, "standard", 0]
 		} else{
 			return [Door2225URL, Bind2225URL, "standard", 0]
 		}
-	} else if (doorWidth <= 28){
+	} else if (doorWidth <= 31){
 		if (document.getElementById("extended").checked){
 			return [DoorE2528URL, BindE2528URL, "standard", 1]
 		} else{
 			return [Door2528URL, Bind2528URL, "standard", 1]
 		}
-	} else if (doorWidth <= 31){
+	} else if (doorWidth <= 34){
 		if (document.getElementById("extended").checked){
 			return [DoorE2831URL, BindE2831URL, "standard", 2]
 		} else{
 			return [Door2831URL, Bind2831URL, "standard", 2]
 		}
-	} else if (doorWidth <= 34){
+	} else if (doorWidth <= 37){
 		if (document.getElementById("extended").checked){
 			return [DoorE3134URL, BindE3134URL, "standard", 3]
 		} else{
 			return [Door3134URL, Bind3134URL, "standard", 3]
 		}
-	} else if (doorWidth <= 53){
+	} else if (doorWidth <= 57){
 		if (document.getElementById("extended").checked){
-			return [DoorE2225URL, BindE2225URL, "saloon", 0]
+			return [DoorES2225URL, BindES2225URL, "saloon", 0]
 		} else{
-			return [Door2225URL, Bind2225URL, "saloon", 0]
+			return [DoorS2225URL, BindS2225URL, "saloon", 0]
 		}
-	} else if (doorWidth <= 59){
+	} else if (doorWidth <= 64){
 		if (document.getElementById("extended").checked){
-			return [DoorE2528URL, BindE2528URL, "saloon", 1]
+			return [DoorES2528URL, BindES2528URL, "saloon", 1]
 		} else{
-			return [Door2528URL, Bind2528URL, "saloon", 1]
+			return [DoorS2528URL, BindS2528URL, "saloon", 1]
 		}
-	} else if (doorWidth <= 65){
+	} else if (doorWidth <= 69){
 		if (document.getElementById("extended").checked){
-			return [DoorE2831URL, BindE2831URL, "saloon", 2]
+			return [DoorES2831URL, BindES2831URL, "saloon", 2]
 		} else{
-			return [Door2831URL, Bind2831URL, "saloon", 2]
+			return [DoorS2831URL, BindS2831URL, "saloon", 2]
 		}
 	} else{
 		if (document.getElementById("extended").checked){
-			return [DoorE3134URL, BindE3134URL, "saloon", 3]
+			return [DoorES3134URL, BindES3134URL, "saloon", 3]
 		} else{
-			return [Door3134URL, Bind3134URL, "saloon", 3]
+			return [DoorS3134URL, BindS3134URL, "saloon", 3]
 		}
 	}
 }
@@ -494,62 +512,42 @@ const intomm = function() {
 	Update
 }
 	
-//document.getElementById("updateDoor").addEventListener("click", Update);
+//Listen for door size change
 document.getElementById("doorWidth").addEventListener("change", Update);
 document.getElementById("doorHeight").addEventListener("change", Update);
 document.getElementById("extended").addEventListener("change", Update);
-document.getElementById("inmm").addEventListener("change", intomm);
-document.getElementById("Pat03").addEventListener("click", function(){PatNo = 0});
-document.getElementById("Pat03").addEventListener("click", Update);
-document.getElementById("Pat04").addEventListener("click", function(){PatNo = 1});
-document.getElementById("Pat04").addEventListener("click", Update);
-document.getElementById("Pat05").addEventListener("click", function(){PatNo = 2});
-document.getElementById("Pat05").addEventListener("click", Update);
-document.getElementById("Pat06").addEventListener("click", function(){PatNo = 3});
-document.getElementById("Pat06").addEventListener("click", Update);
-document.getElementById("Pat07").addEventListener("click", function(){PatNo = 4});
-document.getElementById("Pat07").addEventListener("click", Update);
-document.getElementById("Pat08").addEventListener("click", function(){PatNo = 5});
-document.getElementById("Pat08").addEventListener("click", Update);
-document.getElementById("Pat09").addEventListener("click", function(){PatNo = 6});
-document.getElementById("Pat09").addEventListener("click", Update);
-document.getElementById("Pat10").addEventListener("click", function(){PatNo = 7});
-document.getElementById("Pat10").addEventListener("click", Update);
-document.getElementById("Stock01").addEventListener("click", function(){PatNo = 8});
-document.getElementById("Stock01").addEventListener("click", Update);
-document.getElementById("Stock02").addEventListener("click", function(){PatNo = 9});
-document.getElementById("Stock02").addEventListener("click", Update);
-document.getElementById("Stock03").addEventListener("click", function(){PatNo = 10});
-document.getElementById("Stock03").addEventListener("click", Update);
-document.getElementById("Stock04").addEventListener("click", function(){PatNo = 11});
-document.getElementById("Stock04").addEventListener("click", Update);
-document.getElementById("Stock05").addEventListener("click", function(){PatNo = 12});
-document.getElementById("Stock05").addEventListener("click", Update);
-document.getElementById("Stock06").addEventListener("click", function(){PatNo = 13});
-document.getElementById("Stock06").addEventListener("click", Update);
-document.getElementById("Stock07").addEventListener("click", function(){PatNo = 14});
-document.getElementById("Stock07").addEventListener("click", Update);
-document.getElementById("Stock08").addEventListener("click", function(){PatNo = 15});
-document.getElementById("Stock08").addEventListener("click", Update);
-document.getElementById("Stock09").addEventListener("click", function(){PatNo = 16});
-document.getElementById("Stock09").addEventListener("click", Update);
-document.getElementById("SolWhite").addEventListener("click", function(){PatNo = 17});
-document.getElementById("SolWhite").addEventListener("click", Update);
-document.getElementById("SolCharcoal").addEventListener("click", function(){PatNo = 18});
-document.getElementById("SolCharcoal").addEventListener("click", Update);
-document.getElementById("SolBeige").addEventListener("click", function(){PatNo = 19});
-document.getElementById("SolBeige").addEventListener("click", Update);
 
-document.getElementById("BindBlack").addEventListener("click", function(){BindNo = 0});
-document.getElementById("BindBlack").addEventListener("click", Update);
-document.getElementById("BindNavy").addEventListener("click", function(){BindNo = 1});
-document.getElementById("BindNavy").addEventListener("click", Update);
-document.getElementById("BindCharcoal").addEventListener("click", function(){BindNo = 2});
-document.getElementById("BindCharcoal").addEventListener("click", Update);
-document.getElementById("BindGray").addEventListener("click", function(){BindNo = 3});
-document.getElementById("BindGray").addEventListener("click", Update);
-document.getElementById("BindBeige").addEventListener("click", function(){BindNo = 4});
-document.getElementById("BindBeige").addEventListener("click", Update);
+//Listen for inches to mm change
+document.getElementById("inmm").addEventListener("change", intomm);
+
+//Listen for pattern change
+document.getElementById("Pat03").addEventListener("click", function(){PatNo = 0;Update();});
+document.getElementById("Pat04").addEventListener("click", function(){PatNo = 1;Update();});
+document.getElementById("Pat05").addEventListener("click", function(){PatNo = 2;Update();});
+document.getElementById("Pat06").addEventListener("click", function(){PatNo = 3;Update();});
+document.getElementById("Pat07").addEventListener("click", function(){PatNo = 4;Update();});
+document.getElementById("Pat08").addEventListener("click", function(){PatNo = 5;Update();});
+document.getElementById("Pat09").addEventListener("click", function(){PatNo = 6;Update();});
+document.getElementById("Pat10").addEventListener("click", function(){PatNo = 7;Update();});
+document.getElementById("Stock01").addEventListener("click", function(){PatNo = 8;Update();});
+document.getElementById("Stock02").addEventListener("click", function(){PatNo = 9;Update();});
+document.getElementById("Stock03").addEventListener("click", function(){PatNo = 10;Update();});
+document.getElementById("Stock04").addEventListener("click", function(){PatNo = 11;Update();});
+document.getElementById("Stock05").addEventListener("click", function(){PatNo = 12;Update();});
+document.getElementById("Stock06").addEventListener("click", function(){PatNo = 13;Update();});
+document.getElementById("Stock07").addEventListener("click", function(){PatNo = 14;Update();});
+document.getElementById("Stock08").addEventListener("click", function(){PatNo = 15;Update();});
+document.getElementById("Stock09").addEventListener("click", function(){PatNo = 16;Update();});
+document.getElementById("SolWhite").addEventListener("click", function(){PatNo = 17;Update();});
+document.getElementById("SolCharcoal").addEventListener("click", function(){PatNo = 18;Update();});
+document.getElementById("SolBeige").addEventListener("click", function(){PatNo = 19;Update();});
+
+//Listen for binding change
+document.getElementById("BindBlack").addEventListener("click", function(){BindNo = 0;Update();});
+document.getElementById("BindNavy").addEventListener("click", function(){BindNo = 1;Update();});
+document.getElementById("BindCharcoal").addEventListener("click", function(){BindNo = 2;Update();});
+document.getElementById("BindGray").addEventListener("click", function(){BindNo = 3;Update();});
+document.getElementById("BindBeige").addEventListener("click", function(){BindNo = 4;Update();});
 
 const animate = function () {
    	requestAnimationFrame(animate);
