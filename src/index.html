@@ -34,9 +34,27 @@
 	ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
 	div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
 	div.tabContent.hide { display: none; }
+	#drop-area {
+	border: 2px dashed #ccc;
+	border-radius: 20px;
+	width: 480px;
+	 font-family: sans-serif;
+	margin: 30px auto;
+	margin-top: 0px;
+	padding: 20px;
+	}
+	#drop-area.highlight {
+	border-color: purple;
+	}
+	.drag-and-drop {
+ 	margin-bottom: 10px;
+	}
 	</style>
 	<body>
 		<script src="./js/Options.js" type="module" id="OptionsScript"></script>
+		<script src="./js/ImageUploader.js" type="module" id="ImageUploaderScript"></script>
+		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" integrity="sha512-0SPWAwpC/17yYyZ/4HSllgaK7/gg9OlVozq8K7rf3J8LvCjYEEIfzzpnA2/SSjpGIunCSD18r3UhvDcu/xncWA==" crossorigin="anonymous" referrerpolicy="no-referrer">-->
+		<link rel="stylesheet" href="./CSS/cropper.css" >
 		<div>
 			<script src="./js/ThreeDoor.js" type="module"></script>
 			<canvas id="DoorCanvas" width="600" height="400" style="border:2px solid     #000000;">No canvas support</canvas>
@@ -66,7 +84,16 @@
 			</div>
 		</div>
 		<div class="tabContent" id="picture">
-			<h2>Please choose a pattern, photograph or color for your door</h2>
+			<h2>Please upload an image or choose a pattern, photograph or color for your door</h2>
+			<div id="drop-area">
+				<form class="drag-and-drop">
+					<p style="font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; margin: 10px auto;">Upload a custom *image. Drag and drop into field or:</p>
+					<input type="file" id="customPhoto" accept=".jpg,.png">
+				</form>
+				<div id="gallery" style="margin: auto;"></div>
+				<button id="ShowDoor" hidden>Click Me!</button>
+			</div>
+			<p style="font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; margin: 10px auto;">*Supported formats are .JPG and .PNG</p>
 			<div style="height:300px;overflow:auto;">
 				<button type="pattern" id="Pat03" class="patternbutton">
 					<img src="./assets/Kennon_DoorPattern-03-215x300.jpg"/>

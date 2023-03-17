@@ -23,11 +23,11 @@ import Stock09 from '../assets/KennonDoor_Stock09-215x300.jpg';
 import solwhite from '../assets/KennonDoor_Solid-white-215x300.jpg';
 import solcharcoal from '../assets/KennonDoor_Solid-charcoal-215x300.jpg';
 import solbeige from '../assets/KennonDoor_Solid-beige-215x300.jpg';
-import { CineonToneMapping } from 'three';
+var custom = new Image
 
 var PatNo = 0
 var CurPatNo = 0
-const patterns = [Pat03, Pat04, Pat05, Pat06, Pat07, Pat08, Pat09, Pat10, Stock01, Stock02, Stock03, Stock04, Stock05, Stock06, Stock07, Stock08, Stock09, solwhite, solcharcoal, solbeige]
+const patterns = [Pat03, Pat04, Pat05, Pat06, Pat07, Pat08, Pat09, Pat10, Stock01, Stock02, Stock03, Stock04, Stock05, Stock06, Stock07, Stock08, Stock09, solwhite, solcharcoal, solbeige, custom]
 
 var BindNo = 0
 var CurBindNo = 0
@@ -75,7 +75,6 @@ const camera = new THREE.PerspectiveCamera( 30, canvas.width / canvas.height, 0.
 
 camera.position.set(0,10,200);
 camera.lookAt(0,10,0)
-//const orbit = new OrbitControls(camera, renderer.domElement)
 
 
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
@@ -168,16 +167,16 @@ floor.castShadow = true;
 var Tex = textureloader.load(patterns[PatNo]);
 Tex.wrapS = THREE.RepeatWrapping;
 Tex.wrapT = THREE.RepeatWrapping;
-Tex.offset.set(-1.55/2,0);
+Tex.offset.set(-1,0);
 Tex.rotation = Math.PI/2
-Tex.repeat.set(1.55, 3);
+Tex.repeat.set(2, 3);
 
 var TexMirror = textureloader.load(patterns[PatNo]);
 TexMirror.wrapS = THREE.RepeatWrapping;
 TexMirror.wrapT = THREE.RepeatWrapping;
-TexMirror.offset.set(1.55/2,0);
+TexMirror.offset.set(1,0);
 TexMirror.rotation = Math.PI/2
-TexMirror.repeat.set(-1.55, 3);
+TexMirror.repeat.set(-2, 3);
 
 var doorMat = new THREE.MeshStandardMaterial({roughness: 0.5})
 var doorMatMirror = new THREE.MeshStandardMaterial({roughness: 0.5})
@@ -257,7 +256,9 @@ scene.add( amblight );
 		
 var CurrentdoorWidth = doorWidth
 var CurrentdoorHeight = doorHeight
-		
+
+//const orbit = new OrbitControls(camera, renderer.domElement)
+
 		
 		
 window.addEventListener("resize", () => {
@@ -392,32 +393,35 @@ const Update = function () {
 
 	//find texture offsets and repeats
 	if (URLFinder()[2] == "standard" && document.getElementById("extended").checked != true){
-		widths = [1.178,1.3,1.426,1.55]
+		widths = [1.7,1.8,1.9,2]
 		heights = [2.7,2.8,2.9,3]
-		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		xoffsets = [-widths[0]/2+0.16,-widths[1]/2+0.11,-widths[2]/2+0.06,-widths[3]/2]
 		yoffsets = [0,0,0,0]
 	} else if (URLFinder()[2] == "standard" && document.getElementById("extended").checked){
-		widths = [1.178,1.3,1.426,1.55]
-		heights = [2.83,2.93,3.04,3.14]
-		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
+		widths = [1.7,1.8,1.9,2]
+		heights = [2.835,2.93,3.04,3.135]
+		xoffsets = [-widths[0]/2+0.16,-widths[1]/2+0.11,-widths[2]/2+0.06,-widths[3]/2]
 		yoffsets = [0,0,0,0]
 	} else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked != true){
-		console.log("ran")
-		widths = [1.178,1.3,1.426,1.55]
+		widths = [1.7,1.8,1.9,2]
 		heights = [2.7,2.8,2.9,3]
-		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
-		xoffsetsMirror = [widths[0]/2-0.2,widths[1]/2-0.2,widths[2]/2-0.2,widths[3]/2-0.2]
+		xoffsets = [-widths[0]/2+0.16,-widths[1]/2+0.11,-widths[2]/2+0.06,-widths[3]/2]
+		xoffsetsMirror = [-0.12,0-0.08,-0.05,0]
 		yoffsets = [0,0,0,0]
 	} else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked){
-		widths = [1.178,1.3,1.426,1.55]
-		heights = [2.83,2.93,3.04,3.14]
-		xoffsets = [-widths[0]/2+0.19,-widths[1]/2+0.13,-widths[2]/2+0.06,-widths[3]/2]
-		xoffsetsMirror = [widths[0]/2-0.2,widths[1]/2-0.2,widths[2]/2-0.2,widths[3]/2-0.2]
+		widths = [1.7,1.8,1.9,2]
+		heights = [2.835,2.93,3.04,3.135]
+		xoffsets = [-widths[0]/2+0.16,-widths[1]/2+0.11,-widths[2]/2+0.06,-widths[3]/2]
+		xoffsetsMirror = [-0.12,-0.08,-0.05,0]
 		yoffsets = [0,0,0,0]
 	}
 
-	if (PatNo != CurPatNo){
-		Tex = textureloader.load(patterns[PatNo]);
+	if (PatNo != CurPatNo || PatNo == 20){
+		if (PatNo == 20){
+			Tex = textureloader.load( custom );
+		}else{
+			Tex = textureloader.load(patterns[PatNo]);
+		}
 		Tex.wrapS = THREE.RepeatWrapping;
 		Tex.wrapT = THREE.RepeatWrapping;
 		Tex.offset.set(xoffsets[URLFinder()[3]],yoffsets[URLFinder()[3]]);
@@ -580,6 +584,17 @@ document.getElementById("Stock09").addEventListener("click", function(){PatNo = 
 document.getElementById("SolWhite").addEventListener("click", function(){PatNo = 17;Update();});
 document.getElementById("SolCharcoal").addEventListener("click", function(){PatNo = 18;Update();});
 document.getElementById("SolBeige").addEventListener("click", function(){PatNo = 19;Update();});
+document.getElementById("gallery").addEventListener("click", function(){
+	PatNo = 20;
+	custom = global.croppedImageURL;
+	Update();
+});
+document.getElementById("ShowDoor").addEventListener("click", function(){
+	PatNo = 20;
+	custom = global.croppedImageURL;
+	Update();
+});
+
 
 //Listen for binding change
 document.getElementById("BindBlack").addEventListener("click", function(){BindNo = 0;Update();});
