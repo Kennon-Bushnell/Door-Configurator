@@ -602,6 +602,8 @@ var _kennonDoorSolidCharcoal215X300Jpg = require("../assets/KennonDoor_Solid-cha
 var _kennonDoorSolidCharcoal215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorSolidCharcoal215X300Jpg);
 var _kennonDoorSolidBeige215X300Jpg = require("../assets/KennonDoor_Solid-beige-215x300.jpg");
 var _kennonDoorSolidBeige215X300JpgDefault = parcelHelpers.interopDefault(_kennonDoorSolidBeige215X300Jpg);
+var global = arguments[3];
+var custom = new Image;
 var PatNo = 0;
 var CurPatNo = 0;
 const patterns = [
@@ -624,7 +626,8 @@ const patterns = [
     (0, _kennonDoorStock09215X300JpgDefault.default),
     (0, _kennonDoorSolidWhite215X300JpgDefault.default),
     (0, _kennonDoorSolidCharcoal215X300JpgDefault.default),
-    (0, _kennonDoorSolidBeige215X300JpgDefault.default)
+    (0, _kennonDoorSolidBeige215X300JpgDefault.default),
+    custom
 ];
 var BindNo = 0;
 var CurBindNo = 0;
@@ -675,7 +678,6 @@ canvas.height = window.innerWidth * 1 / 3;
 const camera = new _three.PerspectiveCamera(30, canvas.width / canvas.height, 0.1, 1000);
 camera.position.set(0, 10, 200);
 camera.lookAt(0, 10, 0);
-//const orbit = new OrbitControls(camera, renderer.domElement)
 var doorWidth = parseFloat(document.getElementById("doorWidth").value);
 var doorHeight = parseFloat(document.getElementById("doorHeight").value);
 const renderer = new _three.WebGLRenderer({
@@ -757,15 +759,15 @@ floor.castShadow = true;
 var Tex = textureloader.load(patterns[PatNo]);
 Tex.wrapS = _three.RepeatWrapping;
 Tex.wrapT = _three.RepeatWrapping;
-Tex.offset.set(-0.775, 0);
+Tex.offset.set(-1, 0);
 Tex.rotation = Math.PI / 2;
-Tex.repeat.set(1.55, 3);
+Tex.repeat.set(2, 3);
 var TexMirror = textureloader.load(patterns[PatNo]);
 TexMirror.wrapS = _three.RepeatWrapping;
 TexMirror.wrapT = _three.RepeatWrapping;
-TexMirror.offset.set(0.775, 0);
+TexMirror.offset.set(1, 0);
 TexMirror.rotation = Math.PI / 2;
-TexMirror.repeat.set(-1.55, 3);
+TexMirror.repeat.set(-2, 3);
 var doorMat = new _three.MeshStandardMaterial({
     roughness: 0.5
 });
@@ -834,6 +836,7 @@ scene.add(amblight);
 //directionalLight.castShadow = true;
 var CurrentdoorWidth = doorWidth;
 var CurrentdoorHeight = doorHeight;
+//const orbit = new OrbitControls(camera, renderer.domElement)
 window.addEventListener("resize", ()=>{
     canvas.width = window.innerWidth * 2 / 3;
     canvas.height = window.innerWidth * 1 / 3;
@@ -1017,10 +1020,10 @@ const Update = function() {
     //find texture offsets and repeats
     if (URLFinder()[2] == "standard" && document.getElementById("extended").checked != true) {
         widths = [
-            1.178,
-            1.3,
-            1.426,
-            1.55
+            1.7,
+            1.8,
+            1.9,
+            2
         ];
         heights = [
             2.7,
@@ -1029,8 +1032,8 @@ const Update = function() {
             3
         ];
         xoffsets = [
-            -widths[0] / 2 + 0.19,
-            -widths[1] / 2 + 0.13,
+            -widths[0] / 2 + 0.16,
+            -widths[1] / 2 + 0.11,
             -widths[2] / 2 + 0.06,
             -widths[3] / 2
         ];
@@ -1042,20 +1045,20 @@ const Update = function() {
         ];
     } else if (URLFinder()[2] == "standard" && document.getElementById("extended").checked) {
         widths = [
-            1.178,
-            1.3,
-            1.426,
-            1.55
+            1.7,
+            1.8,
+            1.9,
+            2
         ];
         heights = [
-            2.83,
+            2.835,
             2.93,
             3.04,
-            3.14
+            3.135
         ];
         xoffsets = [
-            -widths[0] / 2 + 0.19,
-            -widths[1] / 2 + 0.13,
+            -widths[0] / 2 + 0.16,
+            -widths[1] / 2 + 0.11,
             -widths[2] / 2 + 0.06,
             -widths[3] / 2
         ];
@@ -1066,12 +1069,11 @@ const Update = function() {
             0
         ];
     } else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked != true) {
-        console.log("ran");
         widths = [
-            1.178,
-            1.3,
-            1.426,
-            1.55
+            1.7,
+            1.8,
+            1.9,
+            2
         ];
         heights = [
             2.7,
@@ -1080,16 +1082,16 @@ const Update = function() {
             3
         ];
         xoffsets = [
-            -widths[0] / 2 + 0.19,
-            -widths[1] / 2 + 0.13,
+            -widths[0] / 2 + 0.16,
+            -widths[1] / 2 + 0.11,
             -widths[2] / 2 + 0.06,
             -widths[3] / 2
         ];
         xoffsetsMirror = [
-            widths[0] / 2 - 0.2,
-            widths[1] / 2 - 0.2,
-            widths[2] / 2 - 0.2,
-            widths[3] / 2 - 0.2
+            -0.12,
+            -0.08,
+            -0.05,
+            0
         ];
         yoffsets = [
             0,
@@ -1099,28 +1101,28 @@ const Update = function() {
         ];
     } else if (URLFinder()[2] == "saloon" && document.getElementById("extended").checked) {
         widths = [
-            1.178,
-            1.3,
-            1.426,
-            1.55
+            1.7,
+            1.8,
+            1.9,
+            2
         ];
         heights = [
-            2.83,
+            2.835,
             2.93,
             3.04,
-            3.14
+            3.135
         ];
         xoffsets = [
-            -widths[0] / 2 + 0.19,
-            -widths[1] / 2 + 0.13,
+            -widths[0] / 2 + 0.16,
+            -widths[1] / 2 + 0.11,
             -widths[2] / 2 + 0.06,
             -widths[3] / 2
         ];
         xoffsetsMirror = [
-            widths[0] / 2 - 0.2,
-            widths[1] / 2 - 0.2,
-            widths[2] / 2 - 0.2,
-            widths[3] / 2 - 0.2
+            -0.12,
+            -0.08,
+            -0.05,
+            0
         ];
         yoffsets = [
             0,
@@ -1129,8 +1131,9 @@ const Update = function() {
             0
         ];
     }
-    if (PatNo != CurPatNo) {
-        Tex = textureloader.load(patterns[PatNo]);
+    if (PatNo != CurPatNo || PatNo == 20) {
+        if (PatNo == 20) Tex = textureloader.load(custom);
+        else Tex = textureloader.load(patterns[PatNo]);
         Tex.wrapS = _three.RepeatWrapping;
         Tex.wrapT = _three.RepeatWrapping;
         Tex.offset.set(xoffsets[URLFinder()[3]], yoffsets[URLFinder()[3]]);
@@ -1327,6 +1330,16 @@ document.getElementById("SolBeige").addEventListener("click", function() {
     PatNo = 19;
     Update();
 });
+document.getElementById("gallery").addEventListener("click", function() {
+    PatNo = 20;
+    custom = global.croppedImageURL;
+    Update();
+});
+document.getElementById("ShowDoor").addEventListener("click", function() {
+    PatNo = 20;
+    custom = global.croppedImageURL;
+    Update();
+});
 //Listen for binding change
 document.getElementById("BindBlack").addEventListener("click", function() {
     BindNo = 0;
@@ -1354,7 +1367,7 @@ const animate = function() {
 };
 animate();
 
-},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","../assets/Kennon_DoorPattern-04-215x300.jpg":"3KeWv","../assets/Kennon_DoorPattern-05-215x300.jpg":"ezzSA","../assets/Kennon_DoorPattern-06-215x300.jpg":"glWZW","../assets/Kennon_DoorPattern-07-215x300.jpg":"8FDyi","../assets/Kennon_DoorPattern-08-215x300.jpg":"2bPpU","../assets/Kennon_DoorPattern-09-215x300.jpg":"cJ1xP","../assets/Kennon_DoorPattern-10-215x300.jpg":"eUgux","../assets/KennonDoor_Stock01-215x300.jpg":"e1mKl","../assets/KennonDoor_Stock02-215x300.jpg":"8Jkvh","../assets/KennonDoor_Stock03-215x300.jpg":"13QZl","../assets/KennonDoor_Stock04-215x300.jpg":"8k1W4","../assets/KennonDoor_Stock05-215x300.jpg":"3dB2B","../assets/KennonDoor_Stock06-215x300.jpg":"53Gp4","../assets/KennonDoor_Stock07-215x300.jpg":"4Y6To","../assets/KennonDoor_Stock08-215x300.jpg":"k8TbE","../assets/KennonDoor_Stock09-215x300.jpg":"ca3UX","../assets/KennonDoor_Solid-white-215x300.jpg":"lgFuk","../assets/KennonDoor_Solid-charcoal-215x300.jpg":"8X7D5","../assets/KennonDoor_Solid-beige-215x300.jpg":"lS73n","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","33cd767818602823":"cRA9d","2ea4c4ad99690eaf":"5Diqo","140e6cea45cff390":"dZdOw","6196d32e673ca18e":"ix4Fu","5b5b0584a3bfc4ad":"af3wy","5d1e860ad3f85b3c":"jYAPw","ae13caebf697414c":"LUyj3","84c989ac0301b865":"5PCMN","138a6069f6608813":"aPNJj","c21856120640f1eb":"k9wq8","5096d46dafc9167c":"iWcp2","5a276617f2cbece":"dR9pw","b70cd30be5a3a7c9":"7Ifsq","c2fae0b72f8a25be":"dECQ7","2d371f4e92ec3783":"ffAyk","8d1ce76699706ecf":"9EGmb"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/loaders/OBJLoader":"htIhD","three/examples/jsm/controls/OrbitControls":"7mqRv","../assets/Kennon_DoorPattern-03-215x300.jpg":"JXXSh","../assets/Kennon_DoorPattern-04-215x300.jpg":"3KeWv","../assets/Kennon_DoorPattern-05-215x300.jpg":"ezzSA","../assets/Kennon_DoorPattern-06-215x300.jpg":"glWZW","../assets/Kennon_DoorPattern-07-215x300.jpg":"8FDyi","../assets/Kennon_DoorPattern-08-215x300.jpg":"2bPpU","../assets/Kennon_DoorPattern-09-215x300.jpg":"cJ1xP","../assets/Kennon_DoorPattern-10-215x300.jpg":"eUgux","../assets/KennonDoor_Stock01-215x300.jpg":"e1mKl","../assets/KennonDoor_Stock02-215x300.jpg":"8Jkvh","../assets/KennonDoor_Stock03-215x300.jpg":"13QZl","../assets/KennonDoor_Stock04-215x300.jpg":"8k1W4","../assets/KennonDoor_Stock05-215x300.jpg":"3dB2B","../assets/KennonDoor_Stock06-215x300.jpg":"53Gp4","../assets/KennonDoor_Stock07-215x300.jpg":"4Y6To","../assets/KennonDoor_Stock08-215x300.jpg":"k8TbE","../assets/KennonDoor_Stock09-215x300.jpg":"ca3UX","../assets/KennonDoor_Solid-white-215x300.jpg":"lgFuk","../assets/KennonDoor_Solid-charcoal-215x300.jpg":"8X7D5","../assets/KennonDoor_Solid-beige-215x300.jpg":"lS73n","9bdcf9200ace841":"57zis","b17f2ce2deed44f7":"iZNGY","eb1c471777993d96":"4CkVl","316327d927075839":"ewcvC","d0166c95924ae6c9":"fjIZZ","db8cd2b96ab34bd":"a5ccz","90d913410ce6e543":"6G6s2","7388d0230505077a":"7ovCB","501f88fbf451ccfd":"2vALh","ab2d1ced0b61a9d4":"6bibl","ab73fe8ca67fbbe2":"eg2aq","cf0f7ee8c3845f34":"2Y9dF","f19bcb3bf5982bb6":"8Zu8W","f3f642acf0461ef6":"1uDcL","42cf8adef48e271f":"lMnZ8","f5a5ba31e26a3ed7":"llRmS","33cd767818602823":"cRA9d","2ea4c4ad99690eaf":"5Diqo","140e6cea45cff390":"dZdOw","6196d32e673ca18e":"ix4Fu","5b5b0584a3bfc4ad":"af3wy","5d1e860ad3f85b3c":"jYAPw","ae13caebf697414c":"LUyj3","84c989ac0301b865":"5PCMN","138a6069f6608813":"aPNJj","c21856120640f1eb":"k9wq8","5096d46dafc9167c":"iWcp2","5a276617f2cbece":"dR9pw","b70cd30be5a3a7c9":"7Ifsq","c2fae0b72f8a25be":"dECQ7","2d371f4e92ec3783":"ffAyk","8d1ce76699706ecf":"9EGmb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2023 Three.js Authors
@@ -30618,37 +30631,7 @@ if (typeof window !== "undefined") {
     else window.__THREE__ = REVISION;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"htIhD":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"htIhD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "OBJLoader", ()=>OBJLoader);
